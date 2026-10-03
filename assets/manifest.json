@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-10-03T15:53:47.857Z",
+  "dataGeneratedAt": "2026-10-03T15:53:47.800Z",
+  "assets": [
+    {
+      "name": "hero",
+      "title": "Hero banner",
+      "module": "./lib/hero.mjs",
+      "height": 320,
+      "supportsColorScheme": true,
+      "bytes": 8636,
+      "files": [
+        "hero.svg"
+      ]
+    },
+    {
+      "name": "project",
+      "title": "Featured project card",
+      "module": "./lib/project.mjs",
+      "height": 228,
+      "supportsColorScheme": true,
+      "bytes": 5996,
+      "files": [
+        "project.svg"
+      ]
+    },
+    {
+      "name": "matrix",
+      "title": "Engineering matrix",
+      "module": "./lib/matrix.mjs",
+      "height": 252,
+      "supportsColorScheme": true,
+      "bytes": 24597,
+      "files": [
+        "matrix.svg"
+      ]
+    },
+    {
+      "name": "activity",
+      "title": "Activity strip and language mix",
+      "module": "./lib/contribution.mjs",
+      "height": 188,
+      "supportsColorScheme": true,
+      "bytes": 38662,
+      "files": [
+        "activity.svg"
+      ]
+    }
+  ]
+}

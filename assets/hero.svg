@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="320" viewBox="0 0 1100 320" role="img" class="hero" data-motion="true" aria-labelledby="hero-title hero-desc">
   <title id="hero-title">3332210 · GitHub profile</title>
-  <desc id="hero-desc">写工具，解决那些每个人都默默忍受的小问题。 Small tools for problems everyone quietly puts up with. Terminal session: dsh plugin add notify-cues; node --test test/; wc -l lib/* → 6 chimes · 1 silence · 0 audio files. Facts shown: 1 public repo, 2 stars, 4 commits.</desc>
+  <desc id="hero-desc">写工具，解决那些每个人都默默忍受的小问题。 Small tools for problems everyone quietly puts up with. Terminal session: dsh plugin add notify-cues; node --test test/; wc -l lib/* → 6 chimes · 1 silence · 0 audio files. Facts shown: 2 public repos, 2 stars, 4 commits.</desc>
   <style>
     .hero{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
     .hero-light.hero{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}
@@ -46,9 +46,9 @@
     <text x="28" y="132" fill="var(--text1)" font-size="42" font-weight="700" letter-spacing="-0.02em">3332210</text>
     <text x="28" y="172" fill="var(--text2)" font-size="16">写工具，解决那些每个人都默默忍受的小问题。</text>
     <text x="28" y="194" fill="var(--text2)" font-size="12">Small tools for problems everyone quietly puts up with.</text>
-    <g class="hero-pill"><title>1 public repo</title><g><rect x="28" y="268" width="95" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="39" y="283.2" fill="var(--text2)" font-size="12">1 public repo</text></g></g>
-    <g class="hero-pill"><title>2 stars</title><g><rect x="131" y="268" width="60" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="142" y="283.2" fill="var(--text2)" font-size="12">2 stars</text></g></g>
-    <g class="hero-pill"><title>4 commits</title><g><rect x="199" y="268" width="80" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="210" y="283.2" fill="var(--text2)" font-size="12">4 commits</text></g></g>
+    <g class="hero-pill"><title>2 public repos</title><g><rect x="28" y="268" width="101" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="39" y="283.2" fill="var(--text2)" font-size="12">2 public repos</text></g></g>
+    <g class="hero-pill"><title>2 stars</title><g><rect x="137" y="268" width="60" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="148" y="283.2" fill="var(--text2)" font-size="12">2 stars</text></g></g>
+    <g class="hero-pill"><title>4 commits</title><g><rect x="205" y="268" width="80" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="216" y="283.2" fill="var(--text2)" font-size="12">4 commits</text></g></g>
     <line x1="28" y1="292" x2="558" y2="292" stroke="var(--line)" stroke-width="1"/></g>
   <g><rect x="548.5" y="28.5" width="523" height="263" rx="10" ry="10" fill="var(--bg1)" stroke="var(--line)" stroke-width="1"/>
     <line x1="548.5" y1="64" x2="1071.5" y2="64" stroke="var(--line)" stroke-width="1"/>
