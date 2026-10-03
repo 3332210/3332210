@@ -1,0 +1,95 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/hero.svg">
+  <img src="assets/hero.svg" alt="3332210 — 我写工具，解决那些每个人都默默忍受的小问题" width="1100" height="320">
+</picture>
+
+我是 **3332210**。我写工具，专门解决那些「每个人都默默忍受」的小问题。
+
+<sub>I build small tools for problems everyone quietly puts up with. Windows-first, nothing extra to install.</sub>
+
+---
+
+## 通知应该告诉你**为什么**结束
+
+Windows 上每个 DSH 通知插件都靠 `agent/status → idle` 判断「完成了」。可这个信号在任务**正常结束**和**你按了停止**时完全相同 —— 于是你中断一个任务，收到一句兴高采烈的「任务完成」。
+
+原因其实一直躺在会话日志里，DSH 自己写进去的：`turn/end` 带一个 `reason`。
+
+<sub>Every Windows notifier for DSH decides "done" from `agent/status → idle`, which is true both when a turn finishes *and* when you press stop — so interrupting a task earns a cheerful "task complete" toast. The reason was always in the session log; DSH writes it there itself.</sub>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/matrix.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/matrix.svg">
+  <img src="assets/matrix.svg" alt="turn/end 的七种结束理由、六种提示音，以及一种刻意的沉默" width="1100" height="252">
+</picture>
+
+六个提示音全部在运行时合成，仓库里**没有任何音频文件** —— 因此也没有 `.NET` 桌面运行时、没有辅助可执行文件要跟着装。
+
+<sub>All six chimes are synthesised at runtime. No audio assets in the repo, and therefore no .NET desktop runtime and no helper executable to install alongside it.</sub>
+
+<details>
+<summary><b>一个被刻意做对的地方：不是每种结束都值得打断你</b></summary>
+
+<br>
+
+`aborted` 有两种来源，混在一起处理就会出错：你亲手按停止是 `reason.kind === 'user'`，该响；而某个代理取消它的子代理是 `parent`，会话销毁是 `disposed` —— 这两个是**生命周期噪音，不是新闻**，所以保持静音。
+
+`TurnEndReasonMap` 在 DSH 里被文档化为可由其它包扩展合并的，所以遇到不认识的 `kind`，插件选择**静音而不是猜**。猜错会让人开始不信任提示音，而不被信任的提示音等于没有提示音。
+
+<sub>`aborted` has two very different sources. A user pressing stop is worth a chime; a parent agent cancelling its child, or a session being disposed, is lifecycle noise rather than news — so those stay silent. And because `TurnEndReasonMap` is documented as merge-extensible by other packages, an unrecognised `kind` stays silent rather than being guessed at. A chime you stop trusting is a chime you turn off.</sub>
+
+</details>
+
+---
+
+## 一个周末，四次提交
+
+这个插件是在大约一天里写出来并发布的。真正说明它质量的，是紧接着那三个提交 —— 它们全都关于**正确性与别人**，而不是新功能。
+
+<sub>Shipped in about a day. What says more is the three commits that followed — all of them about correctness and other people, none of them about features.</sub>
+
+| 提交 | 它修的是什么 |
+|---|---|
+| `dsh-notify-cues: per-reason Windows notifications for DeepSeek Harness` | 初版 |
+| `docs: make the asar path a placeholder rather than one machine's install` | 文档里写死了我自己机器的绝对路径，别人照着做必然失败 |
+| `docs: Chinese README as the default, English alongside, plus settings screenshots` | 默认语言换成读者真正用的那种 |
+| `fix(ci): the unit suite depended on the host locale` | 测试悄悄依赖了我的机器区域设置，绿色只在我这儿是绿色 |
+
+<sub>Absolute paths from one machine, docs in the wrong language for the reader, and a green suite that was only green on the author's box.</sub>
+
+---
+
+## 那个项目
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/project.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/project.svg">
+  <img src="assets/project.svg" alt="dsh-notify-cues：Per-reason Windows notifications for DeepSeek Harness，MIT，JavaScript 与 PowerShell" width="1100" height="228">
+</picture>
+
+**[dsh-notify-cues →](https://github.com/3332210/dsh-notify-cues)** 设置页注册进 DSH 自己的设置对话框（走 `settings.section` 插槽），不是另造一个弹窗；任务栏走聊天软件那套行为 —— 闪几下抓住你的注意力，然后**停止动画但把按钮留亮**，直到你回来。
+
+<sub>A real settings page inside DSH's own dialog via the `settings.section` slot, and chat-app taskbar behaviour: flash to catch your eye, then stop animating but hold the highlight until you come back.</sub>
+
+---
+
+## 状态
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/activity.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/activity.svg">
+  <img src="assets/activity.svg" alt="近 30 天活动与语言构成" width="1100" height="188">
+</picture>
+
+这个账号很年轻，贡献图也很安静。与其贴一堆第三方统计卡片，我更愿意让数字保持诚实：上面每一个都来自 GitHub API，由 CI 定时重新生成，不是手写的。
+
+<sub>Young account, quiet graph. Rather than stacking third-party stat widgets, the numbers above are read straight from the GitHub API and regenerated on a schedule by CI.</sub>
+
+---
+
+<div align="center">
+<sub><b>平台</b> Windows · <b>运行时</b> Node ≥ 20 · <b>许可</b> MIT</sub>
+<br>
+<sub><a href="https://github.com/3332210/dsh-notify-cues">dsh-notify-cues</a> · <a href="https://github.com/3332210/dsh-notify-cues/blob/main/README.md">文档</a> · <a href="https://github.com/3332210/dsh-notify-cues/issues">反馈</a></sub>
+</div>
