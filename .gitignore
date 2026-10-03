@@ -1,0 +1,4 @@
+# Local preview renders — never shipped
+assets/preview/
+_scratch/
+node_modules/

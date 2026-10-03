@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="320" viewBox="0 0 1100 320" role="img" class="hero" data-motion="true" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">3332210 · GitHub profile</title>
+  <desc id="hero-desc">写工具，解决那些每个人都默默忍受的小问题。 Small tools for problems everyone quietly puts up with. Terminal session: dsh plugin add notify-cues; node --test test/; wc -l lib/* → 6 chimes · 1 silence · 0 audio files. Facts shown: 1 public repo, 2 stars, 4 commits.</desc>
+  <style>
+    .hero{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
+    .hero-light.hero{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}
+    @media (prefers-color-scheme: light){.hero{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}}
+    .hero text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif}
+    .hero .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}
+    @media (prefers-reduced-motion: reduce){
+      :where(.hero, .hero *){animation-duration:.001s !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;transition-delay:0s !important}
+      .hero[data-motion],
+      .hero[data-motion] *{opacity:1 !important;transform:none !important}
+    }
+  </style>
+  <style>
+    .hero{--hero-acc-08:rgba(34,211,238,0.08)}
+    .hero-light.hero{--hero-acc-08:rgba(8,145,178,0.08)}
+    @media (prefers-color-scheme: light){.hero{--hero-acc-08:rgba(8,145,178,0.08)}}
+    .hero .hero-pill rect{transition:fill 180ms cubic-bezier(0.22, 1, 0.36, 1),stroke 180ms cubic-bezier(0.22, 1, 0.36, 1)}
+    .hero .hero-pill:hover rect{fill:var(--hero-acc-08);stroke:var(--line-strong)}
+    @keyframes hero-clip-1{from{width:0px}to{width:267.2px}}
+    #hero-clip-rect-1{animation:hero-clip-1 560ms linear 200ms both}
+    @keyframes hero-caret-1{0%{visibility:visible;transform:translateX(0px);opacity:1}26.32%{transform:translateX(0px);opacity:1}95%{opacity:1}100%{visibility:hidden;transform:translateX(267.2px);opacity:0}}
+    #hero-caret-1{visibility:hidden;animation:hero-caret-1 760ms linear 0ms forwards}
+    @keyframes hero-clip-2{from{width:0px}to{width:175.4px}}
+    #hero-clip-rect-2{animation:hero-clip-2 560ms linear 840ms both}
+    @keyframes hero-caret-2{0%{visibility:visible;transform:translateX(0px);opacity:1}95%{opacity:1}100%{visibility:hidden;transform:translateX(175.4px);opacity:0}}
+    #hero-caret-2{visibility:hidden;animation:hero-caret-2 560ms linear 840ms forwards}
+    #hero-prompt-2{animation:hero-prompt-in 320ms cubic-bezier(0.22, 1, 0.36, 1) 720ms both}
+    @keyframes hero-clip-3{from{width:0px}to{width:114.2px}}
+    #hero-clip-rect-3{animation:hero-clip-3 560ms linear 1480ms both}
+    @keyframes hero-caret-3{0%{visibility:visible;transform:translateX(0px);opacity:1}95%{opacity:1}100%{visibility:hidden;transform:translateX(114.2px);opacity:0}}
+    #hero-caret-3{visibility:hidden;animation:hero-caret-3 560ms linear 1480ms forwards}
+    #hero-prompt-3{animation:hero-prompt-in 320ms cubic-bezier(0.22, 1, 0.36, 1) 1360ms both}
+    @keyframes hero-prompt-in{from{opacity:0}to{opacity:1}}
+    @keyframes hero-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    #hero-output{animation:hero-rise 320ms cubic-bezier(0.22, 1, 0.36, 1) 2220ms both}
+    #hero-rest{animation:hero-rise 180ms cubic-bezier(0.22, 1, 0.36, 1) 2660ms both}
+    #hero-blink{animation:hero-blink 2600ms cubic-bezier(0.22, 1, 0.36, 1) 2840ms infinite both}
+    @keyframes hero-blink{0%{opacity:1}48%{opacity:1}52%{opacity:.12}96%{opacity:.12}100%{opacity:1}}
+  </style>
+  <defs><clipPath id="hero-clip-1" clipPathUnits="userSpaceOnUse"><rect id="hero-clip-rect-1" x="584" y="80" width="267.2" height="24"/></clipPath><clipPath id="hero-clip-2" clipPathUnits="userSpaceOnUse"><rect id="hero-clip-rect-2" x="584" y="118" width="175.4" height="24"/></clipPath><clipPath id="hero-clip-3" clipPathUnits="userSpaceOnUse"><rect id="hero-clip-rect-3" x="584" y="156" width="114.2" height="24"/></clipPath></defs>
+  <rect x="0.5" y="0.5" width="1099" height="319" rx="10" ry="10" fill="var(--bg0)" stroke="var(--line)" stroke-width="1"/>
+  <g><text x="28" y="52" fill="var(--text3)" font-size="12" font-weight="500" letter-spacing="0.9" text-anchor="start">GITHUB PROFILE · UPDATED 2026-10-03</text>
+    <text x="28" y="132" fill="var(--text1)" font-size="42" font-weight="700" letter-spacing="-0.02em">3332210</text>
+    <text x="28" y="172" fill="var(--text2)" font-size="16">写工具，解决那些每个人都默默忍受的小问题。</text>
+    <text x="28" y="194" fill="var(--text2)" font-size="12">Small tools for problems everyone quietly puts up with.</text>
+    <g class="hero-pill"><title>1 public repo</title><g><rect x="28" y="268" width="95" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="39" y="283.2" fill="var(--text2)" font-size="12">1 public repo</text></g></g>
+    <g class="hero-pill"><title>2 stars</title><g><rect x="131" y="268" width="60" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="142" y="283.2" fill="var(--text2)" font-size="12">2 stars</text></g></g>
+    <g class="hero-pill"><title>4 commits</title><g><rect x="199" y="268" width="80" height="22" rx="11" ry="11" fill="var(--bg2)" stroke="var(--line)" stroke-width="1"/><text x="210" y="283.2" fill="var(--text2)" font-size="12">4 commits</text></g></g>
+    <line x1="28" y1="292" x2="558" y2="292" stroke="var(--line)" stroke-width="1"/></g>
+  <g><rect x="548.5" y="28.5" width="523" height="263" rx="10" ry="10" fill="var(--bg1)" stroke="var(--line)" stroke-width="1"/>
+    <line x1="548.5" y1="64" x2="1071.5" y2="64" stroke="var(--line)" stroke-width="1"/>
+    <text x="566" y="52" fill="var(--text3)" font-size="12" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace">~/3332210</text>
+    <text x="566" y="96" fill="var(--accent)" font-size="17" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace" id="hero-prompt-1">$</text>
+    <g clip-path="url(#hero-clip-1)"><text x="584" y="96" fill="var(--text2)" font-size="17" class="mono" textLength="265.2" lengthAdjust="spacing">dsh plugin add notify-cues</text></g>
+    <rect x="584" y="83" width="2" height="18" rx="1" ry="1" fill="var(--accent)" id="hero-caret-1"/>
+    <text x="566" y="134" fill="var(--accent)" font-size="17" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace" id="hero-prompt-2">$</text>
+    <g clip-path="url(#hero-clip-2)"><text x="584" y="134" fill="var(--text2)" font-size="17" class="mono" textLength="173.4" lengthAdjust="spacing">node --test test/</text></g>
+    <rect x="584" y="121" width="2" height="18" rx="1" ry="1" fill="var(--accent)" id="hero-caret-2"/>
+    <text x="566" y="172" fill="var(--accent)" font-size="17" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace" id="hero-prompt-3">$</text>
+    <g clip-path="url(#hero-clip-3)"><text x="584" y="172" fill="var(--text2)" font-size="17" class="mono" textLength="112.2" lengthAdjust="spacing">wc -l lib/*</text></g>
+    <rect x="584" y="159" width="2" height="18" rx="1" ry="1" fill="var(--accent)" id="hero-caret-3"/>
+    <g id="hero-output">
+      <path d="M566.5 204.5 l3.3 3.4 l7 -7.5" fill="none" stroke="var(--good)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"/>
+      <text x="584" y="210" fill="var(--text1)" font-size="17" class="mono">6 chimes · 1 silence · 0 audio files</text>
+    </g>
+    <g id="hero-rest">
+      <text x="566" y="248" fill="var(--accent)" font-size="17" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace">$</text>
+      <rect x="584" y="235" width="9" height="18" rx="1.5" ry="1.5" fill="var(--accent)" id="hero-blink"/>
+    </g></g>
+</svg>

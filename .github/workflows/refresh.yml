@@ -1,0 +1,55 @@
+name: refresh profile assets
+
+on:
+  schedule:
+    # 03:17 UTC daily — off the hour so we are not queued behind the world
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'scripts/**'
+      - 'build.mjs'
+      - 'tokens.mjs'
+      - 'package.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync live numbers from the GitHub API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync.mjs
+
+      - name: Rebuild every SVG asset
+        run: node build.mjs
+
+      - name: Validate the generated assets
+        run: node scripts/check.mjs
+
+      - name: Commit if anything actually changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets data/stats.json
+          if git diff --cached --quiet; then
+            echo "nothing changed — no commit"
+          else
+            git commit -m "chore: refresh generated profile assets"
+            git push
+          fi

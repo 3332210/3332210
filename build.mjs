@@ -1,0 +1,157 @@
+#!/usr/bin/env node
+/**
+ * Build every SVG asset from data/stats.json.
+ *
+ * Usage:
+ *   node build.mjs [--data data/stats.json] [--out assets] [--check]
+ *
+ * For each registered asset this writes:
+ *   assets/<name>.svg               shipped — one file, themes itself
+ *   assets/preview/<name>-dark.svg  forced-dark variant, for local screenshots
+ *   assets/preview/<name>-light.svg forced-light variant, for local screenshots
+ *
+ * Why one shipped file and not a dark/light pair: the `#gh-dark-mode-only` /
+ * `#gh-light-mode-only` fragment convention exists for images that *cannot*
+ * theme themselves (PNGs, third-party badges). These assets carry their own
+ * `@media (prefers-color-scheme: light)` block, so a single file already
+ * follows the reader's system theme — with no guess about which theme they are
+ * on and no second file to keep in sync. The preview pair exists only because a
+ * screenshot cannot change its own OS preference; see scripts/check.mjs.
+ *
+ * Failures are loud: a missing or throwing generator fails the build rather
+ * than silently emitting a stale asset.
+ */
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { dirname, resolve, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+
+const args = process.argv.slice(2);
+function arg(name, fallback) {
+  const i = args.indexOf('--' + name);
+  return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback;
+}
+const DATA = resolve(HERE, arg('data', 'data/stats.json'));
+const COPY = resolve(HERE, arg('copy', 'data/copy.json'));
+const OUT = resolve(HERE, arg('out', 'assets'));
+
+/** The asset registry. Order here is the order assets appear in the README. */
+const ASSETS = [
+  { name: 'hero',    module: './lib/hero.mjs',          height: 320, title: 'Hero banner' },
+  { name: 'project', module: './lib/project.mjs',       height: 228, title: 'Featured project card' },
+  { name: 'matrix',  module: './lib/matrix.mjs',        height: 252, title: 'Engineering matrix' },
+  { name: 'activity', module: './lib/contribution.mjs', height: 188, title: 'Activity strip and language mix' },
+];
+
+const SCHEME_RE = /@media\s*\(\s*prefers-color-scheme\s*:\s*light\s*\)/g;
+
+/**
+ * Render one asset.
+ *
+ * Generators take (data, opts) where all opts are optional — an opts-free call
+ * must produce the shipped asset, so a generator stays usable on its own.
+ * `opts.scheme === 'light'` asks for the forced-light variant, which the
+ * generator produces by using tokens.rootClass(scope, 'light').
+ */
+async function renderAsset(entry, data, opts = {}) {
+  const mod = await import(new URL(entry.module, import.meta.url).href);
+  if (typeof mod.render !== 'function') {
+    throw new Error(`${entry.module} does not export render(data, opts)`);
+  }
+  const out = await mod.render(data, opts);
+  const svg = typeof out === 'string' ? out : out?.svg;
+  if (typeof svg !== 'string' || !svg.includes('<svg')) {
+    throw new Error(`${entry.module} render() did not return SVG (got ${typeof svg})`);
+  }
+  return svg;
+}
+
+/** True when the generator went through tokens.styleBlock and honours a scheme. */
+function hasSchemeSupport(svg) {
+  SCHEME_RE.lastIndex = 0;
+  const has = SCHEME_RE.test(svg);
+  SCHEME_RE.lastIndex = 0;
+  return has;
+}
+
+async function main() {
+  if (!existsSync(DATA)) {
+    console.error(`missing ${DATA} — run: node scripts/sync.mjs`);
+    process.exit(1);
+  }
+  const data = JSON.parse(readFileSync(DATA, 'utf8'));
+
+  // Merge the hand-authored copy over the generated data, so `node build.mjs`
+  // produces the intended artwork whether or not sync has just run. Generated
+  // values win for anything copy.json does not explicitly claim.
+  if (existsSync(COPY)) {
+    try {
+      const copy = JSON.parse(readFileSync(COPY, 'utf8'));
+      if (copy.hero) data.hero = { ...copy.hero, ...(data.hero ?? {}) };
+      console.log(`merged copy from ${COPY}`);
+    } catch (e) {
+      console.error(`  WARNING: ${COPY} is not valid JSON (${e.message}) — using generated defaults`);
+    }
+  }
+
+  const outDir = OUT;
+  const previewDir = join(OUT, 'preview');
+  mkdirSync(outDir, { recursive: true });
+  mkdirSync(previewDir, { recursive: true });
+
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    dataGeneratedAt: data.generatedAt,
+    assets: [],
+  };
+
+  const problems = [];
+
+  for (const entry of ASSETS) {
+    try {
+      const svg = await renderAsset(entry, data);
+      const supportsScheme = hasSchemeSupport(svg);
+
+      if (supportsScheme) {
+        // One shipped file. The asset themes itself, so there is nothing to
+        // switch between and nothing that can drift out of sync.
+        writeFileSync(join(outDir, `${entry.name}.svg`), svg);
+
+        // Preview-only variants that pin the scheme, so both themes can be
+        // screenshotted and reviewed on a single machine. The README never
+        // references these.
+        writeFileSync(join(previewDir, `${entry.name}-dark.svg`), await renderAsset(entry, data, {}));
+        writeFileSync(join(previewDir, `${entry.name}-light.svg`), await renderAsset(entry, data, { scheme: 'light' }));
+      } else {
+        problems.push(`${entry.name}: no prefers-color-scheme block; the asset will not follow the reader's theme`);
+        writeFileSync(join(outDir, `${entry.name}.svg`), svg);
+      }
+
+      manifest.assets.push({
+        name: entry.name,
+        title: entry.title,
+        module: entry.module,
+        height: entry.height,
+        supportsColorScheme: supportsScheme,
+        bytes: Buffer.byteLength(svg, 'utf8'),
+        files: [`${entry.name}.svg`],
+      });
+      console.log(`  built ${entry.name.padEnd(9)} ${String(Buffer.byteLength(svg, 'utf8')).padStart(7)} B  scheme=${supportsScheme ? 'yes' : 'NO'}`);
+    } catch (e) {
+      problems.push(`${entry.name}: ${e.message}`);
+      console.error(`  FAILED ${entry.name}: ${e.message}`);
+    }
+  }
+
+  writeFileSync(join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+
+  if (problems.length) {
+    console.error('\nbuild problems:');
+    for (const p of problems) console.error('  - ' + p);
+    process.exit(1);
+  }
+  console.log(`\nwrote ${manifest.assets.length} assets + preview variants to ${outDir}`);
+}
+
+main().catch((e) => { console.error('build failed:', e.stack ?? e.message); process.exit(1); });

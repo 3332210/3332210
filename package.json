@@ -1,0 +1,16 @@
+{
+  "name": "profile-kit",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Generates the SVG assets behind https://github.com/3332210 — hero banner, activity strip, language mix.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "sync": "node scripts/sync.mjs",
+    "build": "node build.mjs",
+    "check": "node scripts/check.mjs",
+    "refresh": "node scripts/sync.mjs && node build.mjs && node scripts/check.mjs"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "_comment": "Hand-authored copy. sync.mjs merges this over the generated data, so nothing here is overwritten by CI. Every number in it is verifiable against the repo — do not add a claim you cannot check.",
+
+  "hero": {
+    "_kicker": "Deliberately omitted so lib/hero.mjs derives it as `GITHUB PROFILE · UPDATED <date>` from data.generatedAt — setting it here would freeze the date.",
+    "tagline": "写工具，解决那些每个人都默默忍受的小问题。",
+    "taglineEn": "Small tools for problems everyone quietly puts up with.",
+    "terminal": {
+      "path": "~/3332210",
+      "lines": [
+        "dsh plugin add notify-cues",
+        "node --test test/",
+        "wc -l lib/*"
+      ],
+      "output": {
+        "text": "6 chimes · 1 silence · 0 audio files",
+        "tone": "good"
+      }
+    }
+  }
+}
