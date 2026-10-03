@@ -46,7 +46,10 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Stage only what the README consumes. assets/manifest.json is a build
+          # report, not a published artifact, so it is neither added nor tracked.
           git add -A assets data/stats.json
+          git rm --cached -q --ignore-unmatch assets/manifest.json || true
           if git diff --cached --quiet; then
             echo "nothing changed — no commit"
           else

@@ -5,6 +5,35 @@
 主页上的每一张图都不是第三方挂件，而是**本项目自己画、自己算的 SVG**。因此它永远不会
 掉图、不会出现「服务挂了显示裂图」，也不会长得像别人的主页。
 
+> **线上状态**：仓库 [3332210/3332210](https://github.com/3332210/3332210) 已发布，
+> GitHub Actions 每天自动刷新数据，有变化才提交。
+
+---
+
+## 还需要你做一件事（只需一次）
+
+主页左侧的 **Name / Bio / 链接** 属于账号设置，不在仓库里。当前 token 没有 `user`
+权限，所以这一步需要你自己执行——**尤其是把 `3332210` 换成你的真名或常用 ID**，
+那是主页上最显眼的位置：
+
+```powershell
+# 1. 建一个带 `user` 权限的 token（勾 user 即可），然后：
+$env:GITHUB_TOKEN = "你的新token"
+node profile-kit/scripts/profile.mjs `
+  --name "你的名字" `
+  --bio "Small tools for problems everyone quietly puts up with. Windows-first, Node ≥ 20." `
+  --blog "https://github.com/3332210/dsh-notify-cues"
+```
+
+顶部主视觉里的名字来自**账号名**（`lib/hero.mjs` 读 `data.stats.json` 的
+`user.login`），所以设好账号 Name 后重新构建一次，图上的名字就会跟着变：
+
+```powershell
+node profile-kit/build.mjs && node profile-kit/scripts/check.mjs
+node profile-kit/scripts/export-repo.mjs
+node profile-kit/scripts/deploy.mjs --user 3332210
+```
+
 ---
 
 ## 它由什么组成
@@ -52,7 +81,6 @@ node scripts/check.mjs
 改完跑一遍 `node build.mjs && node scripts/check.mjs` 就生效了。
 
 ## 三条必须遵守的约定
-
 违反这三条会让图**静默坏掉**——浏览器只渲染到出错的地方，你在编辑器里看不出来。
 
 1. **属性值必须转义。** 用 `lib/primitives.mjs` 里的图元，别手写 `<text font-family="...">`。
