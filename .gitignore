@@ -1,4 +1,7 @@
 # Local preview renders — never shipped
 assets/preview/
+# Build report, not a published artifact. CI regenerates it every run, so
+# without this entry it gets committed back on every scheduled refresh.
+assets/manifest.json
 _scratch/
 node_modules/
