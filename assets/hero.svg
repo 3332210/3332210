@@ -42,7 +42,7 @@
   </style>
   <defs><clipPath id="hero-clip-1" clipPathUnits="userSpaceOnUse"><rect id="hero-clip-rect-1" x="584" y="80" width="267.2" height="24"/></clipPath><clipPath id="hero-clip-2" clipPathUnits="userSpaceOnUse"><rect id="hero-clip-rect-2" x="584" y="118" width="175.4" height="24"/></clipPath><clipPath id="hero-clip-3" clipPathUnits="userSpaceOnUse"><rect id="hero-clip-rect-3" x="584" y="156" width="114.2" height="24"/></clipPath></defs>
   <rect x="0.5" y="0.5" width="1099" height="319" rx="10" ry="10" fill="var(--bg0)" stroke="var(--line)" stroke-width="1"/>
-  <g><text x="28" y="52" fill="var(--text3)" font-size="12" font-weight="500" letter-spacing="0.9" text-anchor="start">GITHUB PROFILE · UPDATED 2026-10-04</text>
+  <g><text x="28" y="52" fill="var(--text3)" font-size="12" font-weight="500" letter-spacing="0.9" text-anchor="start">GITHUB PROFILE · UPDATED 2026-10-05</text>
     <text x="28" y="132" fill="var(--text1)" font-size="42" font-weight="700" letter-spacing="-0.02em">3332210</text>
     <text x="28" y="172" fill="var(--text2)" font-size="16">写工具，解决那些每个人都默默忍受的小问题。</text>
     <text x="28" y="194" fill="var(--text2)" font-size="12">Small tools for problems everyone quietly puts up with.</text>
