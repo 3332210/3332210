@@ -1,8 +1,12 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/hero.svg">
-  <img src="assets/hero.svg" alt="3332210 — 我写工具，解决那些每个人都默默忍受的小问题" width="1100" height="320">
+  <a href="https://3332210.github.io/"><img src="assets/hero.svg" alt="3332210 — 我写工具，解决那些每个人都默默忍受的小问题" width="1100" height="320"></a>
 </picture>
+
+我是 **INKWARD / 守墨**，也叫 3332210。→ **[个人主页](https://3332210.github.io/)**
+
+_原名行保留于此以便对照：_
 
 我是 **3332210**。我写工具，专门解决那些「每个人都默默忍受」的小问题。
 
