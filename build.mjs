@@ -100,16 +100,17 @@ async function main() {
   }
   const data = JSON.parse(readFileSync(DATA, 'utf8'));
 
-  // Merge the hand-authored copy over the generated data, so `node build.mjs`
-  // produces the intended artwork whether or not sync has just run. Generated
-  // values win for anything copy.json does not explicitly claim.
+  /* copy.json used to hold hand-authored hero copy. hero2 derives everything it
+     prints from data — the meta strip is real repo/star/licence counts and the
+     tagline is the positioning line — so the file is retired. The merge stays
+     for any future generator that wants a curated override. */
   if (existsSync(COPY)) {
     try {
       const copy = JSON.parse(readFileSync(COPY, 'utf8'));
       if (copy.hero) data.hero = { ...copy.hero, ...(data.hero ?? {}) };
       console.log(`merged copy from ${COPY}`);
     } catch (e) {
-      console.error(`  WARNING: ${COPY} is not valid JSON (${e.message}) — using generated defaults`);
+      console.error(`  WARNING: ${COPY} is not valid JSON (${e.message}) — ignoring it`);
     }
   }
 

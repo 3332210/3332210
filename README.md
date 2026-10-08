@@ -75,8 +75,6 @@ Windows 上每个 DSH 通知插件都靠 `agent/status → idle` 判断「完成
      on its own — do not hand-edit inside them. -->
 <!-- BELOW:BEGIN -->
 `01` · **[dsh-notify-cues ↗](https://github.com/3332210/dsh-notify-cues)** — Per-reason Windows notifications for DeepSeek Harness — distinct chimes for completed / interrupted / error · JAVASCRIPT · ★ 2
-
-`02` · **[3332210.github.io ↗](https://github.com/3332210/3332210.github.io)** — INKWARD — 守墨 · personal site · JAVASCRIPT · ★ 0
 <!-- BELOW:END -->
 
 图里放不下可点的链接，所以每一行同时以文字链接给出——上图是这份列表的视觉版本，不是唯一入口。

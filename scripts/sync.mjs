@@ -253,9 +253,11 @@ async function main() {
     }
   }
 
-  // Hand-authored copy wins over generated defaults, so a rewrite of the
-  // terminal narrative or tagline survives every scheduled CI run. Kept in a
-  // separate file so "generated" and "written by a human" never blur together.
+  /* Hand-authored copy is optional, and currently retired: hero2 derives every
+     string it prints from data — the meta strip is real repo/star/licence
+     counts, the tagline is the positioning line. The hook stays so a curated
+     override can be reintroduced by creating data/copy.json; its absence is
+     normal and is not a warning. */
   let copy = null;
   if (existsSync(COPY)) {
     try {
@@ -263,8 +265,6 @@ async function main() {
     } catch (e) {
       warnings.push(`copy.json is not valid JSON: ${e.message}`);
     }
-  } else {
-    warnings.push('no data/copy.json — falling back to generated defaults for the hero copy');
   }
 
   const stats = {

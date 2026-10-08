@@ -101,7 +101,16 @@ function checkSvg(file, svg) {
   }
   notes.push(`${label}: ${rects.length} rect(s), all rx/ry paired`);
 
-  /* var(--token) references must resolve. */
+  /* var(--token) references must resolve.
+   *
+   * This check exists because of a bug that shipped: a palette key was emitted as
+   * `--ink2` while every reference said `var(--ink-2)`. An unresolvable var() in
+   * an SVG presentation attribute does NOT fall back to the inherited value or to
+   * transparent — it takes the property's INITIAL value. So every secondary text
+   * run painted solid BLACK on the near-black plate, and because black on cream is
+   * perfectly legible, the light theme hid it completely through several review
+   * passes. Review the DARK variant first: it is the only one where a missing
+   * token is visible at all. */
   const used = new Set();
   for (const m of svg.matchAll(/var\(\s*--([a-z0-9-]+)/gi)) used.add(m[1].toLowerCase());
   // Tokens defined in this file itself (styleBlock emits them) are fine.
@@ -109,9 +118,10 @@ function checkSvg(file, svg) {
   for (const m of svg.matchAll(/--([a-z0-9-]+)\s*:/gi)) defined.add(m[1].toLowerCase());
   for (const t of used) {
     if (!KNOWN_TOKENS.has(t) && !defined.has(t)) {
-      err(label, `uses var(--${t}) which is neither a known token nor defined in the file`);
+      err(label, `uses var(--${t}) which is neither a known token nor defined in the file — it will paint the INITIAL value (usually black), not fall back`);
     }
   }
+  if (used.size) notes.push(`${label}: ${used.size} var() token(s), all resolve`);
 
   /* Theme support. */
   if (!/prefers-color-scheme\s*:\s*light/.test(svg)) {
