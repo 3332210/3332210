@@ -3,8 +3,6 @@
   <desc id="matrix-desc">七种结束理由映射到六种提示音，全部取自 DSH 的 turn/end 事件里的 reason.kind：completed 上升、aborted·user 下降、aborted·hook 或 blocked 两声平响、error 低而下降、max-tokens 三声急促、approval/asked 琶音；aborted·parent|disposed 故意保持安静。悬停任意一行，左侧会显示这一行的真实字段与音高。</desc>
   <style>
     .matrix{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
-    .matrix-light.matrix{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}
-    @media (prefers-color-scheme: light){.matrix{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}}
     .matrix text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif}
     .matrix .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}
     @media (prefers-reduced-motion: reduce){

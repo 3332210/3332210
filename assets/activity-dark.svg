@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="188" viewBox="0 0 1100 188" role="img" class="activity" aria-labelledby="activity-title activity-desc">
+  <title id="activity-title">Activity and languages for 3332210 — 8 contributions on 3 active days in the last 30 days</title>
+  <desc id="activity-desc">A 30-day activity strip: 8 contributions on 3 days, longest streak 3, peak 3 on 2026-10-02. Beside it, a stacked bar of the language mix: JavaScript 78%, HTML 10.1%, CSS 8.5%, PowerShell 3.4%.</desc>
+  <style>
+    .activity{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
+    .activity text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif}
+    .activity .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}
+    @media (prefers-reduced-motion: reduce){
+      :where(.activity, .activity *){animation-duration:.001s !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;transition-delay:0s !important}
+      .activity[data-motion],
+      .activity[data-motion] *{opacity:1 !important;transform:none !important}
+    }
+  </style>
+  <style>
+    /* Forced-dark variant of the design-system rule. Same mechanism as
+     * .activity-light.activity: a pure specificity win, so dark art can be
+     * verified on a machine whose OS prefers light. The shipped asset is still
+     * the plain .activity render. */
+    .activity-dark.activity{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
+    .activity-bg{fill:var(--bg0)}
+    .activity-axis{stroke:var(--line-strong);stroke-width:1}
+    .activity-hair{stroke:var(--line);stroke-width:1}
+    .activity-sep{stroke:var(--line);stroke-width:1}
+    .activity-lbl{fill:var(--text3);font-size:11px;font-weight:500;letter-spacing:0.06em}
+    .activity-meta{fill:var(--text3);font-size:11px;font-weight:500}
+    .activity-count{fill:var(--text2);font-size:12px;font-weight:600}
+    /* A zero day keeps a resting rail, so the axis reads as measured, not broken. */
+    .activity-rail{fill:var(--bg2);stroke:var(--line-strong);stroke-width:1;stroke-opacity:0.9}
+    /* Everything inside a column group is a decoy: the transparent hit rect that
+     * follows it owns the pointer. */
+    .activity-marks{pointer-events:none}
+    .activity-bar{fill:var(--accent);fill-opacity:0.75;stroke:var(--accent);stroke-width:1;stroke-opacity:0.4;transition:fill-opacity 180ms cubic-bezier(0.22,1,0.36,1),stroke-opacity 180ms cubic-bezier(0.22,1,0.36,1)}
+    .activity-ring{fill:none;stroke:var(--accent);stroke-width:1;stroke-opacity:0.9;opacity:0;transition:opacity 180ms cubic-bezier(0.22,1,0.36,1)}
+    /* Hover: raise the alpha, add the 1px outline, reveal this column's tip. */
+    .activity:has(#activity-hit-0:hover) #activity-marks-0 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-0:hover) #activity-marks-0 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-0:hover) #activity-tips #activity-tip-0{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-1:hover) #activity-marks-1 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-1:hover) #activity-marks-1 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-1:hover) #activity-tips #activity-tip-1{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-2:hover) #activity-marks-2 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-2:hover) #activity-marks-2 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-2:hover) #activity-tips #activity-tip-2{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-3:hover) #activity-marks-3 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-3:hover) #activity-marks-3 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-3:hover) #activity-tips #activity-tip-3{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-4:hover) #activity-marks-4 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-4:hover) #activity-marks-4 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-4:hover) #activity-tips #activity-tip-4{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-5:hover) #activity-marks-5 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-5:hover) #activity-marks-5 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-5:hover) #activity-tips #activity-tip-5{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-6:hover) #activity-marks-6 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-6:hover) #activity-marks-6 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-6:hover) #activity-tips #activity-tip-6{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-7:hover) #activity-marks-7 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-7:hover) #activity-marks-7 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-7:hover) #activity-tips #activity-tip-7{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-8:hover) #activity-marks-8 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-8:hover) #activity-marks-8 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-8:hover) #activity-tips #activity-tip-8{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-9:hover) #activity-marks-9 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-9:hover) #activity-marks-9 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-9:hover) #activity-tips #activity-tip-9{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-10:hover) #activity-marks-10 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-10:hover) #activity-marks-10 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-10:hover) #activity-tips #activity-tip-10{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-11:hover) #activity-marks-11 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-11:hover) #activity-marks-11 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-11:hover) #activity-tips #activity-tip-11{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-12:hover) #activity-marks-12 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-12:hover) #activity-marks-12 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-12:hover) #activity-tips #activity-tip-12{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-13:hover) #activity-marks-13 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-13:hover) #activity-marks-13 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-13:hover) #activity-tips #activity-tip-13{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-14:hover) #activity-marks-14 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-14:hover) #activity-marks-14 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-14:hover) #activity-tips #activity-tip-14{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-15:hover) #activity-marks-15 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-15:hover) #activity-marks-15 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-15:hover) #activity-tips #activity-tip-15{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-16:hover) #activity-marks-16 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-16:hover) #activity-marks-16 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-16:hover) #activity-tips #activity-tip-16{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-17:hover) #activity-marks-17 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-17:hover) #activity-marks-17 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-17:hover) #activity-tips #activity-tip-17{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-18:hover) #activity-marks-18 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-18:hover) #activity-marks-18 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-18:hover) #activity-tips #activity-tip-18{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-19:hover) #activity-marks-19 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-19:hover) #activity-marks-19 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-19:hover) #activity-tips #activity-tip-19{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-20:hover) #activity-marks-20 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-20:hover) #activity-marks-20 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-20:hover) #activity-tips #activity-tip-20{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-21:hover) #activity-marks-21 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-21:hover) #activity-marks-21 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-21:hover) #activity-tips #activity-tip-21{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-22:hover) #activity-marks-22 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-22:hover) #activity-marks-22 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-22:hover) #activity-tips #activity-tip-22{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-23:hover) #activity-marks-23 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-23:hover) #activity-marks-23 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-23:hover) #activity-tips #activity-tip-23{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-24:hover) #activity-marks-24 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-24:hover) #activity-marks-24 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-24:hover) #activity-tips #activity-tip-24{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-25:hover) #activity-marks-25 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-25:hover) #activity-marks-25 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-25:hover) #activity-tips #activity-tip-25{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-26:hover) #activity-marks-26 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-26:hover) #activity-marks-26 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-26:hover) #activity-tips #activity-tip-26{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-27:hover) #activity-marks-27 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-27:hover) #activity-marks-27 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-27:hover) #activity-tips #activity-tip-27{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-28:hover) #activity-marks-28 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-28:hover) #activity-marks-28 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-28:hover) #activity-tips #activity-tip-28{opacity:1;visibility:visible;transform:translateY(0)}
+    .activity:has(#activity-hit-29:hover) #activity-marks-29 .activity-bar{fill-opacity:1;stroke-opacity:1}
+    .activity:has(#activity-hit-29:hover) #activity-marks-29 .activity-ring{opacity:1}
+    .activity:has(#activity-hit-29:hover) #activity-tips #activity-tip-29{opacity:1;visibility:visible;transform:translateY(0)}
+    /* The tip layer. Position and target are set in CSS only — never by JS. */
+    .activity-tip{opacity:0;visibility:hidden;transform:translateY(3px);transition:opacity 180ms cubic-bezier(0.22,1,0.36,1),transform 180ms cubic-bezier(0.22,1,0.36,1),visibility 0s linear 180ms}
+    /* The tip box is OPAQUE (fill:var(--bg1), the raised-panel token from the
+     * design system). A stroke-only box lets the meta row show through the tip
+     * text and makes the whole thing illegible. */
+    .activity-tip-box{fill:var(--bg1);stroke:var(--line-strong);stroke-width:1}
+    .activity-tip-date{fill:var(--text3);font-size:11px;font-weight:500;letter-spacing:0.06em}
+    .activity-tip-rule{stroke:var(--line);stroke-width:1}
+    .activity-tip-count{fill:var(--text1);font-size:13px;font-weight:600}
+    .activity-tip-rule{stroke:var(--line);stroke-width:1}
+    .activity-langname{fill:var(--text1);font-size:12px;font-weight:600}
+    .activity-langpct{fill:var(--text2);font-size:12px;font-weight:400}
+    @media (prefers-reduced-motion: reduce){
+      .activity-bar,.activity-ring,.activity-tip{transition:none}
+      .activity-tip{transform:none}
+    }
+  </style>
+  <rect class="activity-bg" x="0" y="0" width="1100" height="188"/>
+  <text x="28" y="30" fill="var(--text3)" font-size="11" font-weight="500" letter-spacing="0.9" text-anchor="start" class="activity-lbl">CONTRIBUTIONS · 09 SEP – 08 OCT · LAST 30 DAYS</text>
+  <line x1="28" y1="152" x2="668" y2="152" stroke="var(--line-strong)" stroke-width="1" class="activity-axis"/>
+  <line class="activity-hair" x1="60" y1="152" x2="60" y2="156"/>
+  <text x="60" y="158" fill="var(--text3)" font-size="11" text-anchor="middle" class="activity-meta">10 Sep</text>
+  <line class="activity-hair" x1="252" y1="152" x2="252" y2="156"/>
+  <text x="252" y="158" fill="var(--text3)" font-size="11" text-anchor="middle" class="activity-meta">19 Sep</text>
+  <line class="activity-hair" x1="444" y1="152" x2="444" y2="156"/>
+  <text x="444" y="158" fill="var(--text3)" font-size="11" text-anchor="middle" class="activity-meta">28 Sep</text>
+  <line class="activity-hair" x1="636" y1="152" x2="636" y2="156"/>
+  <text x="636" y="158" fill="var(--text3)" font-size="11" text-anchor="middle" class="activity-meta">07 Oct</text>
+  <g aria-hidden="true"><rect x="28" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-09 — 0 contributions</title></rect><rect x="49.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-10 — 0 contributions</title></rect><rect x="70.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-11 — 0 contributions</title></rect><rect x="92" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-12 — 0 contributions</title></rect><rect x="113.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-13 — 0 contributions</title></rect><rect x="134.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-14 — 0 contributions</title></rect><rect x="156" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-15 — 0 contributions</title></rect><rect x="177.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-16 — 0 contributions</title></rect><rect x="198.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-17 — 0 contributions</title></rect><rect x="220" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-18 — 0 contributions</title></rect><rect x="241.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-19 — 0 contributions</title></rect><rect x="262.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-20 — 0 contributions</title></rect><rect x="284" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-21 — 0 contributions</title></rect><rect x="305.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-22 — 0 contributions</title></rect><rect x="326.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-23 — 0 contributions</title></rect><rect x="348" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-24 — 0 contributions</title></rect><rect x="369.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-25 — 0 contributions</title></rect><rect x="390.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-26 — 0 contributions</title></rect><rect x="412" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-27 — 0 contributions</title></rect><rect x="433.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-28 — 0 contributions</title></rect><rect x="454.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-29 — 0 contributions</title></rect><rect x="476" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-09-30 — 0 contributions</title></rect><rect x="497.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-10-01 — 0 contributions</title></rect><rect x="582.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-10-05 — 0 contributions</title></rect><rect x="604" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-10-06 — 0 contributions</title></rect><rect x="625.3333" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-10-07 — 0 contributions</title></rect><rect x="646.6667" y="150.5" width="19.7333" height="1.5" class="activity-rail"><title>2026-10-08 — 0 contributions</title></rect></g>
+  <g id="activity-marks-0" class="activity-marks" aria-hidden="true"></g><rect x="28" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-0" pointer-events="all"><title>2026-09-09 — 0 contributions</title></rect>
+  <g id="activity-marks-1" class="activity-marks" aria-hidden="true"></g><rect x="49.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-1" pointer-events="all"><title>2026-09-10 — 0 contributions</title></rect>
+  <g id="activity-marks-2" class="activity-marks" aria-hidden="true"></g><rect x="70.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-2" pointer-events="all"><title>2026-09-11 — 0 contributions</title></rect>
+  <g id="activity-marks-3" class="activity-marks" aria-hidden="true"></g><rect x="92" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-3" pointer-events="all"><title>2026-09-12 — 0 contributions</title></rect>
+  <g id="activity-marks-4" class="activity-marks" aria-hidden="true"></g><rect x="113.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-4" pointer-events="all"><title>2026-09-13 — 0 contributions</title></rect>
+  <g id="activity-marks-5" class="activity-marks" aria-hidden="true"></g><rect x="134.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-5" pointer-events="all"><title>2026-09-14 — 0 contributions</title></rect>
+  <g id="activity-marks-6" class="activity-marks" aria-hidden="true"></g><rect x="156" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-6" pointer-events="all"><title>2026-09-15 — 0 contributions</title></rect>
+  <g id="activity-marks-7" class="activity-marks" aria-hidden="true"></g><rect x="177.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-7" pointer-events="all"><title>2026-09-16 — 0 contributions</title></rect>
+  <g id="activity-marks-8" class="activity-marks" aria-hidden="true"></g><rect x="198.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-8" pointer-events="all"><title>2026-09-17 — 0 contributions</title></rect>
+  <g id="activity-marks-9" class="activity-marks" aria-hidden="true"></g><rect x="220" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-9" pointer-events="all"><title>2026-09-18 — 0 contributions</title></rect>
+  <g id="activity-marks-10" class="activity-marks" aria-hidden="true"></g><rect x="241.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-10" pointer-events="all"><title>2026-09-19 — 0 contributions</title></rect>
+  <g id="activity-marks-11" class="activity-marks" aria-hidden="true"></g><rect x="262.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-11" pointer-events="all"><title>2026-09-20 — 0 contributions</title></rect>
+  <g id="activity-marks-12" class="activity-marks" aria-hidden="true"></g><rect x="284" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-12" pointer-events="all"><title>2026-09-21 — 0 contributions</title></rect>
+  <g id="activity-marks-13" class="activity-marks" aria-hidden="true"></g><rect x="305.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-13" pointer-events="all"><title>2026-09-22 — 0 contributions</title></rect>
+  <g id="activity-marks-14" class="activity-marks" aria-hidden="true"></g><rect x="326.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-14" pointer-events="all"><title>2026-09-23 — 0 contributions</title></rect>
+  <g id="activity-marks-15" class="activity-marks" aria-hidden="true"></g><rect x="348" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-15" pointer-events="all"><title>2026-09-24 — 0 contributions</title></rect>
+  <g id="activity-marks-16" class="activity-marks" aria-hidden="true"></g><rect x="369.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-16" pointer-events="all"><title>2026-09-25 — 0 contributions</title></rect>
+  <g id="activity-marks-17" class="activity-marks" aria-hidden="true"></g><rect x="390.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-17" pointer-events="all"><title>2026-09-26 — 0 contributions</title></rect>
+  <g id="activity-marks-18" class="activity-marks" aria-hidden="true"></g><rect x="412" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-18" pointer-events="all"><title>2026-09-27 — 0 contributions</title></rect>
+  <g id="activity-marks-19" class="activity-marks" aria-hidden="true"></g><rect x="433.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-19" pointer-events="all"><title>2026-09-28 — 0 contributions</title></rect>
+  <g id="activity-marks-20" class="activity-marks" aria-hidden="true"></g><rect x="454.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-20" pointer-events="all"><title>2026-09-29 — 0 contributions</title></rect>
+  <g id="activity-marks-21" class="activity-marks" aria-hidden="true"></g><rect x="476" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-21" pointer-events="all"><title>2026-09-30 — 0 contributions</title></rect>
+  <g id="activity-marks-22" class="activity-marks" aria-hidden="true"></g><rect x="497.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-22" pointer-events="all"><title>2026-10-01 — 0 contributions</title></rect>
+  <g id="activity-marks-23" class="activity-marks" aria-hidden="true"><rect x="518.6667" y="48" width="19.7333" height="104" class="activity-bar"><title>2026-10-02 — 3 contributions</title></rect><rect x="518.6667" y="48" width="19.7333" height="104" class="activity-ring"></rect><text x="528.5333" y="62" fill="var(--text1)" font-size="12" font-weight="600" text-anchor="middle" class="activity-count">3</text></g><rect x="518.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-23" pointer-events="all"><title>2026-10-02 — 3 contributions</title></rect>
+  <g id="activity-marks-24" class="activity-marks" aria-hidden="true"><rect x="540" y="48" width="19.7333" height="104" class="activity-bar"><title>2026-10-03 — 3 contributions</title></rect><rect x="540" y="48" width="19.7333" height="104" class="activity-ring"></rect><text x="549.8667" y="62" fill="var(--text1)" font-size="12" font-weight="600" text-anchor="middle" class="activity-count">3</text></g><rect x="540" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-24" pointer-events="all"><title>2026-10-03 — 3 contributions</title></rect>
+  <g id="activity-marks-25" class="activity-marks" aria-hidden="true"><rect x="561.3333" y="67.0844" width="19.7333" height="84.9156" class="activity-bar"><title>2026-10-04 — 2 contributions</title></rect><rect x="561.3333" y="67.0844" width="19.7333" height="84.9156" class="activity-ring"></rect><text x="571.2" y="81.0844" fill="var(--text1)" font-size="12" font-weight="600" text-anchor="middle" class="activity-count">2</text></g><rect x="561.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-25" pointer-events="all"><title>2026-10-04 — 2 contributions</title></rect>
+  <g id="activity-marks-26" class="activity-marks" aria-hidden="true"></g><rect x="582.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-26" pointer-events="all"><title>2026-10-05 — 0 contributions</title></rect>
+  <g id="activity-marks-27" class="activity-marks" aria-hidden="true"></g><rect x="604" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-27" pointer-events="all"><title>2026-10-06 — 0 contributions</title></rect>
+  <g id="activity-marks-28" class="activity-marks" aria-hidden="true"></g><rect x="625.3333" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-28" pointer-events="all"><title>2026-10-07 — 0 contributions</title></rect>
+  <g id="activity-marks-29" class="activity-marks" aria-hidden="true"></g><rect x="646.6667" y="48" width="21.3333" height="104" fill="transparent" class="activity-hit" id="activity-hit-29" pointer-events="all"><title>2026-10-08 — 0 contributions</title></rect>
+  <line class="activity-sep" x1="712" y1="18" x2="712" y2="162"/>
+  <text x="1072" y="30" fill="var(--text3)" font-size="11" font-weight="500" letter-spacing="0.9" text-anchor="end" class="activity-lbl">LANGUAGES · BY BYTES</text>
+  <path class="activity-langseg" d="M752 72 H957.0989 V96 H752 A4 4 0 0 1 748 92 V76 A4 4 0 0 1 752 72 Z" fill="var(--accent)"><title>JavaScript — 78% of bytes</title></path>
+  <rect class="activity-langseg" x="957.0989" y="72" width="27.041" height="24" fill="var(--accent2)"><title>HTML — 10.1% of bytes</title></rect>
+  <rect class="activity-langseg" x="984.1399" y="72" width="22.7572" height="24" fill="var(--text3)"><title>CSS — 8.5% of bytes</title></rect>
+  <path class="activity-langseg" d="M1006.8971 72 H1012 A4 4 0 0 1 1016 76 V92 A4 4 0 0 1 1012 96 H1006.8971 Z" fill="var(--text3)"><title>PowerShell — 3.4% of bytes</title></path>
+  <rect x="748" y="111" width="8" height="8" rx="2" ry="2" fill="var(--accent)" class="activity-langdot"></rect>
+  <text x="764" y="120" fill="var(--text1)" font-size="12" font-weight="600" class="activity-langname">JavaScript</text>
+  <text x="1072" y="120" fill="var(--text2)" font-size="12" text-anchor="end" class="activity-langpct">78%</text>
+  <line x1="748" y1="131" x2="1016" y2="131" stroke="var(--line)" stroke-width="1" class="activity-hair"/>
+  <rect x="748" y="133" width="8" height="8" rx="2" ry="2" fill="var(--text3)" class="activity-langdot"></rect>
+  <text x="764" y="142" fill="var(--text1)" font-size="12" font-weight="600" class="activity-langname">Other (≥2)</text>
+  <text x="1072" y="142" fill="var(--text2)" font-size="12" text-anchor="end" class="activity-langpct">22%</text>
+  <text x="28" y="176" fill="var(--text3)" font-size="11" class="activity-meta">8 contributions on 3 active days · longest streak 3 · last 30 days</text>
+  <text x="1072" y="176" fill="var(--text3)" font-size="11" text-anchor="end" class="activity-meta">3 repositories · 2 stars · 9 contributions in the last year</text>
+  <g id="activity-tips" aria-hidden="true"><g class="activity-tip" id="activity-tip-0" style="translate:28px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-09</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-1" style="translate:28px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-10</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-2" style="translate:28px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-11</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-3" style="translate:28px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-12</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-4" style="translate:28px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-13</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-5" style="translate:46.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-14</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-6" style="translate:67.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-15</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-7" style="translate:89.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-16</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-8" style="translate:110.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-17</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-9" style="translate:131.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-18</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-10" style="translate:153.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-19</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-11" style="translate:174.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-20</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-12" style="translate:195.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-21</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-13" style="translate:217.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-22</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-14" style="translate:238.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-23</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-15" style="translate:259.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-24</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-16" style="translate:281.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-25</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-17" style="translate:302.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-26</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-18" style="translate:323.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-27</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-19" style="translate:345.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-28</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-20" style="translate:366.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-29</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-21" style="translate:387.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-09-30</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-22" style="translate:409.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-01</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-23" style="translate:430.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-02</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">3 contributions</text></g><g class="activity-tip" id="activity-tip-24" style="translate:451.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-03</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">3 contributions</text></g><g class="activity-tip" id="activity-tip-25" style="translate:473.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-04</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">2 contributions</text></g><g class="activity-tip" id="activity-tip-26" style="translate:494.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-05</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-27" style="translate:515.8667px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-06</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-28" style="translate:537.2px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-07</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g><g class="activity-tip" id="activity-tip-29" style="translate:558.5333px 157px"><rect x="0" y="0" width="196" height="24" rx="4" ry="4" class="activity-tip-box"></rect><text class="activity-tip-date" x="12" y="16">2026-10-08</text><text class="activity-tip-count" x="184" y="16" text-anchor="end">0 contributions</text></g></g>
+</svg>

@@ -21,9 +21,9 @@ Windows 上每个 DSH 通知插件都靠 `agent/status → idle` 判断「完成
 <sub>Every Windows notifier for DSH decides "done" from `agent/status → idle`, which is true both when a turn finishes *and* when you press stop — so interrupting a task earns a cheerful "task complete" toast. The reason was always in the session log; DSH writes it there itself.</sub>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/matrix.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/matrix.svg">
-  <img src="assets/matrix.svg" alt="turn/end 的七种结束理由、六种提示音，以及一种刻意的沉默" width="1100" height="252">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/matrix-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/matrix-light.svg">
+  <img src="assets/matrix-light.svg" alt="turn/end 的七种结束理由、六种提示音，以及一种刻意的沉默" width="1100" height="252">
 </picture>
 
 六个提示音全部在运行时合成，仓库里**没有任何音频文件** —— 因此也没有 `.NET` 桌面运行时、没有辅助可执行文件要跟着装。
@@ -90,9 +90,9 @@ Windows 上每个 DSH 通知插件都靠 `agent/status → idle` 判断「完成
 ## 状态
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/activity.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/activity.svg">
-  <img src="assets/activity.svg" alt="近 30 天活动与语言构成" width="1100" height="188">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg">
+  <img src="assets/activity-light.svg" alt="近 30 天活动与语言构成" width="1100" height="188">
 </picture>
 
 这个账号很年轻，贡献图也很安静。与其贴一堆第三方统计卡片，我更愿意让数字保持诚实：上面每一个都来自 GitHub API，由 CI 定时重新生成，不是手写的。

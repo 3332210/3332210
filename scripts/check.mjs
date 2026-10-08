@@ -132,12 +132,10 @@ function checkSvg(file, svg, opts = {}) {
     if (hasLightMedia) {
       err(label, `carries a prefers-color-scheme media query, but it is the ${opts.singleTheme} member of a pair — <picture> selects it, so it must be single-theme`);
     }
-    // And it must actually BE that theme, or the pair is decorative.
-    const wantLight = opts.singleTheme === 'light';
-    const isLight = /#f2efe9/i.test(svg);
-    const isDark = /#0a0d14/i.test(svg);
-    if (wantLight && !isLight) err(label, 'named -light but does not carry the light paper token');
-    if (!wantLight && !isDark) err(label, 'named -dark but does not carry the dark paper token');
+    /* That it really IS that theme is asserted in the pair loop in main(), where
+       both members are already in hand — asserting a specific hex here would
+       hard-code one palette (the INKWARD paper is #F2EFE9/#0E0E10, the older kit
+       tokens are #ffffff/#0a0d14, and both are legitimate). */
   } else if (!hasLightMedia) {
     err(label, 'no @media (prefers-color-scheme: light) block — a self-theming asset needs one');
   }
@@ -360,7 +358,7 @@ function checkReadme() {
   if (bareImgs) {
     warn('README.md', `${bareImgs} bare <img> outside <picture> — GitHub auto-wraps those in <a href="<img src>">, so clicking opens the raw SVG`);
   }
-  notes.push(`README.md: ${pictureBlocks.length} <picture> block(s), dark/light handled inside the SVG`);
+  notes.push(`README.md: ${pictureBlocks.length} <picture> block(s), each pointing at a real single-theme pair`);
 
   /* Link sanity: relative links must not escape the repo. */
   for (const m of md.matchAll(/\]\((?!https?:|#|mailto:)([^)]+)\)/g)) {
@@ -394,8 +392,11 @@ function main() {
   /* Assets shipped as a real dark/light FILE PAIR for <picture>. The critical
      assertion is that the two files differ: a pair whose members are identical
      means the theme is not actually being forced, which is exactly the failure
-     that put a light hero on a dark profile page. */
-  for (const [name, base] of [['hero', 'hero'], ['work', 'work']]) {
+     that put a light hero on a dark profile page. Applies to every asset, since
+     all four now ship this way. */
+  for (const [name, base] of [
+    ['hero', 'hero'], ['work', 'work'], ['matrix', 'matrix'], ['activity', 'activity'],
+  ]) {
     const d = join(ASSETS, `${base}-dark.svg`);
     const l = join(ASSETS, `${base}-light.svg`);
     if (!existsSync(d) || !existsSync(l)) {
@@ -407,20 +408,24 @@ function main() {
     if (a === b) {
       err(name, `${base}-dark.svg and ${base}-light.svg are byte-identical — the theme is not being forced, so <picture> has nothing to switch between`);
     }
+    /* And the difference has to be in the TOKENS, not just somewhere in the file.
+       Compared as a difference rather than against hard-coded hex, because the
+       INKWARD assets and the older kit tokens use different (both valid) paper
+       colours. */
+    const tokenBlock = (s) => (s.match(/<style>[\s\S]*?<\/style>/) ?? [''])[0];
+    if (tokenBlock(a) === tokenBlock(b)) {
+      err(name, `${base}-dark.svg and ${base}-light.svg share an identical token block — the colours are not being switched`);
+    }
     if (/prefers-color-scheme\s*:\s*light/.test(a) || /prefers-color-scheme\s*:\s*light/.test(b)) {
       err(name, `a paired file still carries a prefers-color-scheme media query — each must be single-theme or the file's theme depends on the reader's OS again`);
     }
     notes.push(`${name}: pair differs, both single-theme (${(a.length / 1024).toFixed(0)} KB / ${(b.length / 1024).toFixed(0)} KB)`);
   }
 
-  /* Assets that theme themselves in one file. */
-  for (const [name, fileName] of [
-    ['matrix', 'matrix.svg'],
-    ['activity', 'activity.svg'],
-  ]) {
-    if (RETIRED.has(name)) continue;
-    checkVariantPair(name, ASSETS, fileName);
-  }
+  /* All four assets now ship as single-theme pairs, checked above. The old
+     self-theming path (one file with a light media query, verified through a
+     forced-scheme preview) is no longer used; if that architecture returns, this
+     is where its pair check belongs. */
   checkReadme();
   checkNoiseMirror();
 

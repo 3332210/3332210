@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-10-08T18:08:42.174Z",
+  "dataGeneratedAt": "2026-10-08T18:06:40.156Z",
+  "assets": [
+    {
+      "name": "hero",
+      "title": "Hero — INKWARD / 守墨 with generated field",
+      "module": "./lib/hero2.mjs",
+      "height": 360,
+      "supportsColorScheme": true,
+      "paired": true,
+      "bytes": 85916,
+      "files": [
+        "hero-dark.svg",
+        "hero-light.svg"
+      ]
+    },
+    {
+      "name": "work",
+      "title": "Work list",
+      "module": "./lib/hero2.mjs",
+      "height": 128,
+      "supportsColorScheme": true,
+      "paired": true,
+      "bytes": 4537,
+      "files": [
+        "work-dark.svg",
+        "work-light.svg"
+      ]
+    },
+    {
+      "name": "matrix",
+      "title": "Engineering matrix",
+      "module": "./lib/matrix.mjs",
+      "height": 252,
+      "supportsColorScheme": true,
+      "paired": true,
+      "bytes": 24597,
+      "files": [
+        "matrix-dark.svg",
+        "matrix-light.svg"
+      ]
+    },
+    {
+      "name": "activity",
+      "title": "Activity strip and language mix",
+      "module": "./lib/contribution.mjs",
+      "height": 188,
+      "supportsColorScheme": true,
+      "paired": true,
+      "bytes": 39590,
+      "files": [
+        "activity-dark.svg",
+        "activity-light.svg"
+      ]
+    }
+  ]
+}

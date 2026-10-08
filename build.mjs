@@ -53,8 +53,8 @@ const KIT = HERE;
 const ASSETS = [
   { name: 'hero',     module: './lib/hero2.mjs',        fn: 'render',     file: 'hero.svg',     height: 360, pair: true, title: 'Hero — INKWARD / 守墨 with generated field' },
   { name: 'work',     module: './lib/hero2.mjs',        fn: 'renderWork', file: 'work.svg',     height: 128, pair: true, title: 'Work list' },
-  { name: 'matrix',   module: './lib/matrix.mjs',       height: 252, title: 'Engineering matrix' },
-  { name: 'activity', module: './lib/contribution.mjs', height: 188, title: 'Activity strip and language mix' },
+  { name: 'matrix',   module: './lib/matrix.mjs',       height: 252, pair: true, title: 'Engineering matrix' },
+  { name: 'activity', module: './lib/contribution.mjs', height: 188, pair: true, title: 'Activity strip and language mix' },
 ];
 
 /**
@@ -73,8 +73,15 @@ const ASSETS = [
  * deterministic in any embedding, and `<picture>` then does the switching it was
  * designed for. `pair: true` marks the assets that need this.
  */
+/**
+ * The shipped filename for an asset. `file` overrides it when the output name
+ * differs from the registry name (hero/work), otherwise it is `<name>.svg`.
+ */
+const baseFile = (entry) => entry.file ?? `${entry.name}.svg`;
+
+/** One member of a single-theme pair, e.g. hero-dark.svg. */
 const PAIRED_FILE = (entry, theme) =>
-  `${entry.file.replace(/\.svg$/, '')}-${theme}.svg`;
+  `${baseFile(entry).replace(/\.svg$/, '')}-${theme}.svg`;
 
 /** Where the work list's markdown rows live inside README.md. */
 const BELOW_BEGIN = '<!-- BELOW:BEGIN -->';
@@ -153,10 +160,10 @@ async function main() {
      for anyone who later edits the file that is no longer shipped. */
   for (const entry of ASSETS) {
     if (!entry.pair) continue;
-    const stale = join(outDir, entry.file);
+    const stale = join(outDir, baseFile(entry));
     if (existsSync(stale)) {
       rmSync(stale);
-      console.log(`  removed ${entry.file} (superseded by the -dark/-light pair)`);
+      console.log(`  removed ${baseFile(entry)} (superseded by the -dark/-light pair)`);
     }
   }
 
