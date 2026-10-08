@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="152" viewBox="0 0 1100 152" role="img" aria-labelledby="work-title work-desc" class="work">
+  <title id="work-title">作品 · WORK — 3332210 的公开仓库</title>
+  <desc id="work-desc">01 dsh-notify-cues：Per-reason Windows notifications for DeepSeek Harness — distinct chimes for completed / interrupted / error（JAVASCRIPT，2 ★） 每一行在 README 中都有对应的可点击链接。</desc>
+  <style>
+    .work{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
+    .work text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif}
+    .work .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}
+    @media (prefers-reduced-motion: reduce){
+      :where(.work, .work *){animation-duration:.001s !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;transition-delay:0s !important}
+      .work[data-motion],
+      .work[data-motion] *{opacity:1 !important;transform:none !important}
+    }
+  </style>
+  <style>
+    .work{--paper:#0E0E10;--ink:#F5F5F0;--ink-2:#8A8A93;--ink-3:#4A4A52;--rule:#232327;--acid:#C8FF4D;--field-ink:#F5F5F0;--field-acid:#C8FF4D;--ease:cubic-bezier(.16,.7,0,1);}
+    .work .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}
+    .work .work-name{transition:fill 280ms var(--ease)}
+    .work .work-row:hover .work-name{fill:var(--acid)}
+  </style>
+  <rect x="0" y="0" width="1100" height="152" fill="var(--paper)"/>
+  <path d="M36 35.5L40.5 40L36 44.5L31.5 40Z" fill="var(--acid)"/>
+  <text x="48" y="44" fill="var(--ink-2)" font-size="11" letter-spacing="0.14em" class="mono">作品 · WORK</text>
+  <text x="1068" y="44" fill="var(--ink-2)" font-size="11" text-anchor="end" letter-spacing="0.14em" class="mono">UPDATED 2026-10-08 · 1 OF 3 PUBLIC REPOS</text>
+  <line x1="32" y1="60" x2="1068" y2="60" stroke="var(--rule)" stroke-width="1"/>
+  <g class="work-row work-row-lead"><rect x="16" y="77" width="2" height="30" rx="1" ry="1" fill="var(--acid)"/><title>01 · dsh-notify-cues — Per-reason Windows notifications for DeepSeek Harness — distinct chimes for completed / interrupted / error — JAVASCRIPT · 2 stars</title><text x="32" y="87" fill="var(--ink-2)" font-size="11" letter-spacing="0.1em" class="mono">01</text><text x="76" y="87" fill="var(--ink)" font-size="17" letter-spacing="-0.02em" class="mono work-name">dsh-notify-cues</text><text x="918" y="87" fill="var(--ink-2)" font-size="11" text-anchor="end" letter-spacing="0.12em" class="mono">JAVASCRIPT</text><path d="M1018.4 76.6L1019.73 80.17L1023.54 80.33L1020.56 82.7L1021.57 86.37L1018.4 84.27L1015.23 86.37L1016.24 82.7L1013.26 80.33L1017.07 80.17Z" fill="var(--ink-2)"/><text x="1034" y="87" fill="var(--ink-2)" font-size="11" text-anchor="end" class="mono">2</text><text x="76" y="111" fill="var(--ink-2)" font-size="14">Per-reason Windows notifications for DeepSeek Harness — distinct chimes for completed / interrupted / error</text><path d="M1049.6 94.4L1065.2 78.8M1056.8 78.8L1065.2 78.8L1065.2 87.2" fill="none" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <line x1="32" y1="124" x2="1068" y2="124" stroke="var(--rule)" stroke-width="1"/>
+  <rect x="0.5" y="0.5" width="1099" height="151" fill="none" stroke="var(--rule)" stroke-width="1"/>
+</svg>

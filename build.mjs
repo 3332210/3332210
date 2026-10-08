@@ -21,7 +21,7 @@
  * Failures are loud: a missing or throwing generator fails the build rather
  * than silently emitting a stale asset.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -51,11 +51,30 @@ const KIT = HERE;
  * case. Getting these wrong silently ships a stale asset, so they are explicit.
  */
 const ASSETS = [
-  { name: 'hero',     module: './lib/hero2.mjs',        fn: 'render',     file: 'hero.svg',     height: 360, title: 'Hero — INKWARD / 守墨 with generated field' },
-  { name: 'work',     module: './lib/hero2.mjs',        fn: 'renderWork', file: 'work.svg',     height: 128, title: 'Work list' },
+  { name: 'hero',     module: './lib/hero2.mjs',        fn: 'render',     file: 'hero.svg',     height: 360, pair: true, title: 'Hero — INKWARD / 守墨 with generated field' },
+  { name: 'work',     module: './lib/hero2.mjs',        fn: 'renderWork', file: 'work.svg',     height: 128, pair: true, title: 'Work list' },
   { name: 'matrix',   module: './lib/matrix.mjs',       height: 252, title: 'Engineering matrix' },
   { name: 'activity', module: './lib/contribution.mjs', height: 188, title: 'Activity strip and language mix' },
 ];
+
+/**
+ * Assets that ship as a real dark/light FILE PAIR instead of one self-theming
+ * file.
+ *
+ * Why this exists — it was a live bug, not a preference. With `<picture>`, the
+ * base `<img>` (the one with no matching `<source>`) is what a light-theme reader
+ * gets, and its `src` pointed at the same file as the dark source. A
+ * self-theming SVG resolves `prefers-color-scheme` against the IMAGE DOCUMENT,
+ * which follows the operating system — not GitHub's `data-color-mode`. So a
+ * reader on a light OS with GitHub in dark mode was served a light-theming
+ * artwork: the hero rendered in the wrong theme on the live profile.
+ *
+ * Two files that each carry exactly one theme (no media query at all) are
+ * deterministic in any embedding, and `<picture>` then does the switching it was
+ * designed for. `pair: true` marks the assets that need this.
+ */
+const PAIRED_FILE = (entry, theme) =>
+  `${entry.file.replace(/\.svg$/, '')}-${theme}.svg`;
 
 /** Where the work list's markdown rows live inside README.md. */
 const BELOW_BEGIN = '<!-- BELOW:BEGIN -->';
@@ -127,26 +146,60 @@ async function main() {
 
   const problems = [];
 
+  /* Remove single-file outputs that a paired asset supersedes.
+     Without this, switching an asset from the self-theming form to a real
+     dark/light pair leaves the old file behind, and it is still referenced by
+     nothing — dead weight in a repository that is meant to be read, and a trap
+     for anyone who later edits the file that is no longer shipped. */
+  for (const entry of ASSETS) {
+    if (!entry.pair) continue;
+    const stale = join(outDir, entry.file);
+    if (existsSync(stale)) {
+      rmSync(stale);
+      console.log(`  removed ${entry.file} (superseded by the -dark/-light pair)`);
+    }
+  }
+
   for (const entry of ASSETS) {
     try {
       const svg = await renderAsset(entry, data);
       const supportsScheme = hasSchemeSupport(svg);
       // `file` names the flat single-file output; otherwise the name is the stem.
       const outName = entry.file ?? `${entry.name}.svg`;
+      const written = [];
 
-      if (supportsScheme) {
+      if (entry.pair) {
+        /* A real file pair, one theme each and no media query, for <picture>.
+           See PAIRED_FILE above for why the self-theming single file is wrong
+           for these two. */
+        for (const theme of ['dark', 'light']) {
+          const themed = await renderAsset(entry, data, { theme });
+          if (hasSchemeSupport(themed)) {
+            problems.push(`${entry.name}-${theme}: still carries a media query — the pair must be single-theme`);
+          }
+          const name = PAIRED_FILE(entry, theme);
+          writeFileSync(join(outDir, name), themed);
+          writeFileSync(join(previewDir, name), themed);
+          written.push(name);
+          console.log(`  built ${name.padEnd(17)} ${String(Buffer.byteLength(themed, 'utf8')).padStart(7)} B  single-theme`);
+        }
+      } else if (supportsScheme) {
         // One shipped file. The asset themes itself, so there is nothing to
         // switch between and nothing that can drift out of sync.
         writeFileSync(join(outDir, outName), svg);
+        written.push(outName);
 
         // Preview-only variants that pin the scheme, so both themes can be
         // screenshotted and reviewed on a single machine. The README never
-        // references these.
+        // references these. NOTE these are NOT what the paired assets above
+        // emit: pinning via a class is defeated by an equal-specificity media
+        // query, which is exactly the bug the pair exists to avoid.
         writeFileSync(join(previewDir, `${entry.name}-dark.svg`), await renderAsset(entry, data, {}));
         writeFileSync(join(previewDir, `${entry.name}-light.svg`), await renderAsset(entry, data, { scheme: 'light' }));
       } else {
         problems.push(`${entry.name}: no prefers-color-scheme block; the asset will not follow the reader's theme`);
         writeFileSync(join(outDir, outName), svg);
+        written.push(outName);
       }
 
       manifest.assets.push({
@@ -155,10 +208,13 @@ async function main() {
         module: entry.module,
         height: entry.height,
         supportsColorScheme: supportsScheme,
+        paired: !!entry.pair,
         bytes: Buffer.byteLength(svg, 'utf8'),
-        files: [outName],
+        files: written,
       });
-      console.log(`  built ${outName.padEnd(13)} ${String(Buffer.byteLength(svg, 'utf8')).padStart(7)} B  scheme=${supportsScheme ? 'yes' : 'NO'}`);
+      if (!entry.pair) {
+        console.log(`  built ${outName.padEnd(17)} ${String(Buffer.byteLength(svg, 'utf8')).padStart(7)} B  scheme=${supportsScheme ? 'yes' : 'NO'}`);
+      }
     } catch (e) {
       problems.push(`${entry.name}: ${e.message}`);
       console.error(`  FAILED ${entry.name}: ${e.message}`);

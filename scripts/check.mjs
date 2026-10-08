@@ -59,7 +59,7 @@ function warn(file, msg) { warnings.push(`${file}: ${msg}`); }
 
 /* ------------------------------------------------------------- svg checks */
 
-function checkSvg(file, svg) {
+function checkSvg(file, svg, opts = {}) {
   const isLight = /-light\.svg$/.test(file);
   const label = file;
 
@@ -123,9 +123,23 @@ function checkSvg(file, svg) {
   }
   if (used.size) notes.push(`${label}: ${used.size} var() token(s), all resolve`);
 
-  /* Theme support. */
-  if (!/prefers-color-scheme\s*:\s*light/.test(svg)) {
-    err(label, 'no @media (prefers-color-scheme: light) block — light theme will not work');
+  /* Theme support. Two legitimate shapes:
+     - a self-theming single file: it MUST carry the light media query
+     - one member of a <picture> pair: it MUST NOT, or its theme would depend on
+       the reader's OS instead of on GitHub's <picture> selection */
+  const hasLightMedia = /prefers-color-scheme\s*:\s*light/.test(svg);
+  if (opts.singleTheme) {
+    if (hasLightMedia) {
+      err(label, `carries a prefers-color-scheme media query, but it is the ${opts.singleTheme} member of a pair — <picture> selects it, so it must be single-theme`);
+    }
+    // And it must actually BE that theme, or the pair is decorative.
+    const wantLight = opts.singleTheme === 'light';
+    const isLight = /#f2efe9/i.test(svg);
+    const isDark = /#0a0d14/i.test(svg);
+    if (wantLight && !isLight) err(label, 'named -light but does not carry the light paper token');
+    if (!wantLight && !isDark) err(label, 'named -dark but does not carry the dark paper token');
+  } else if (!hasLightMedia) {
+    err(label, 'no @media (prefers-color-scheme: light) block — a self-theming asset needs one');
   }
   if (!/prefers-reduced-motion\s*:\s*reduce/.test(svg)) {
     err(label, 'no @media (prefers-reduced-motion: reduce) block — mandatory per design-system §4');
@@ -136,9 +150,11 @@ function checkSvg(file, svg) {
   const refs = new Set([...svg.matchAll(/url\(#([^)]+)\)/g)].map((m) => m[1]));
   /* Scope label for id-prefix checks: strip the extension only. */
   /* The scope a generator chose may differ from its output stem — see
-     SCOPE_BY_NAME. The id-prefix rule is about the scope, not the filename. */
+     SCOPE_BY_NAME. Strip the -dark/-light pair suffix first: the scope is the
+     asset's, not the file's. */
   const stem = file.replace(/\.svg$/, '');
-  const scope = SCOPE_BY_NAME[stem] ?? stem;
+  const base = stem.replace(/-(dark|light)$/, '');
+  const scope = SCOPE_BY_NAME[base] ?? base;
   for (const id of ids) {
     if (id === 't' || id === 'd') continue; // svgRoot's title/desc ids
     if (!id.startsWith(scope)) {
@@ -228,6 +244,49 @@ function checkVariantPair(name, dir, fileName = `${name}.svg`) {
     }
   } else {
     err(name, `missing shipped asset ${fileName}`);
+  }
+}
+
+/* ---------------------------------------------------------- noise mirror -- */
+
+/**
+ * `lib/noise.mjs` is a copy of `portfolio/src/noise.js`.
+ *
+ * The copy exists because the profile repository is deployed alone and CI runs
+ * the generators there, so an import reaching outside the repo fails the build
+ * outright ("Cannot find module"). A copy that silently drifts would mean CI
+ * renders DIFFERENT artwork from the workspace, which is worse than the problem
+ * it solves — so the two are compared here, on exported names AND on the bodies.
+ */
+function checkNoiseMirror() {
+  const a = join(KIT, 'lib', 'noise.mjs');
+  const b = join(KIT, '..', 'portfolio', 'src', 'noise.js');
+  if (!existsSync(a)) { err('lib/noise.mjs', 'missing — the generators import it'); return; }
+  if (!existsSync(b)) {
+    notes.push('portfolio/src/noise.js not in this checkout; mirror not compared');
+    return;
+  }
+
+  const read = (p) => readFileSync(p, 'utf8');
+  const names = (src) => [...src.matchAll(/export\s+(?:function|const)\s+([A-Za-z0-9_]+)/g)]
+    .map((m) => m[1]).sort().join(',');
+
+  const na = names(read(a));
+  const nb = names(read(b));
+  if (na !== nb) {
+    err('lib/noise.mjs', `exports [${na}] but portfolio/src/noise.js exports [${nb}] — the mirror has drifted`);
+    return;
+  }
+  notes.push(`noise mirror exports match the site: ${na}`);
+
+  /* Compare bodies too: a changed threshold or octave count keeps the same names
+     and would silently make CI's artwork differ from the workspace's. */
+  const body = (src) => src
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .split('\n').map((l) => l.replace(/\/\/.*$/, '')).join('')
+    .replace(/\s+/g, '');
+  if (body(read(a)) !== body(read(b))) {
+    warn('lib/noise.mjs', 'body differs from portfolio/src/noise.js — CI would render different artwork than the workspace');
   }
 }
 
@@ -323,15 +382,39 @@ function main() {
   }
 
   console.log(`checking ${svgs.length} asset(s) in ${ASSETS}\n`);
+  /* A file whose name ends -dark.svg / -light.svg is one member of a pair and
+     must be SINGLE-THEME: it is selected by <picture>, not by a media query, so
+     carrying one would make its theme depend on the reader's OS again. */
   for (const f of svgs.sort()) {
     const svg = readFileSync(join(ASSETS, f), 'utf8');
-    checkSvg(f, svg);
+    const m = /-(dark|light)\.svg$/.exec(f);
+    checkSvg(f, svg, m ? { singleTheme: m[1] } : {});
   }
-  /* Registry name -> shipped filename. Two use a flat name that differs from
-     their registry stem, so the pair is spelled out rather than derived. */
+
+  /* Assets shipped as a real dark/light FILE PAIR for <picture>. The critical
+     assertion is that the two files differ: a pair whose members are identical
+     means the theme is not actually being forced, which is exactly the failure
+     that put a light hero on a dark profile page. */
+  for (const [name, base] of [['hero', 'hero'], ['work', 'work']]) {
+    const d = join(ASSETS, `${base}-dark.svg`);
+    const l = join(ASSETS, `${base}-light.svg`);
+    if (!existsSync(d) || !existsSync(l)) {
+      err(name, `missing the ${base}-dark.svg / ${base}-light.svg pair — the README's <picture> needs both`);
+      continue;
+    }
+    const a = readFileSync(d, 'utf8');
+    const b = readFileSync(l, 'utf8');
+    if (a === b) {
+      err(name, `${base}-dark.svg and ${base}-light.svg are byte-identical — the theme is not being forced, so <picture> has nothing to switch between`);
+    }
+    if (/prefers-color-scheme\s*:\s*light/.test(a) || /prefers-color-scheme\s*:\s*light/.test(b)) {
+      err(name, `a paired file still carries a prefers-color-scheme media query — each must be single-theme or the file's theme depends on the reader's OS again`);
+    }
+    notes.push(`${name}: pair differs, both single-theme (${(a.length / 1024).toFixed(0)} KB / ${(b.length / 1024).toFixed(0)} KB)`);
+  }
+
+  /* Assets that theme themselves in one file. */
   for (const [name, fileName] of [
-    ['hero', 'hero.svg'],
-    ['work', 'work.svg'],
     ['matrix', 'matrix.svg'],
     ['activity', 'activity.svg'],
   ]) {
@@ -339,6 +422,7 @@ function main() {
     checkVariantPair(name, ASSETS, fileName);
   }
   checkReadme();
+  checkNoiseMirror();
 
   console.log('notes:');
   for (const n of notes) console.log('  · ' + n);

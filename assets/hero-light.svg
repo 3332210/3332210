@@ -2,9 +2,7 @@
   <title id="hero2-title">INKWARD · 守墨 — GitHub 个人横幅</title>
   <desc id="hero2-desc">守墨（INKWARD）的个人主页横幅。巨大的字标中，INK 是空心描边、WARD 是实心，下面一行是中文名「守墨」。字标背后是一层按三倍频 Perlin 噪声生成的像素场，它在字标周围自动变稀、变淡，所以字始终清楚。左上角是公开仓库、星标与许可证，右下角是一句中英对照的定位语，仓库列表与更新时间在下方的工作清单里。</desc>
   <style>
-    .hero2{--bg0:#0a0d14;--bg1:#0e121b;--bg2:#080a10;--line:#1c2230;--line-strong:#2a3346;--text1:#e8edf7;--text2:#93a1bb;--text3:#5b6a86;--accent:#22d3ee;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;}
-    .hero2-light.hero2{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}
-    @media (prefers-color-scheme: light){.hero2{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}}
+    .hero2{--bg0:#ffffff;--bg1:#f9fafb;--bg2:#f3f4f6;--line:#e5e7eb;--line-strong:#d1d5db;--text1:#0f172a;--text2:#475569;--text3:#94a3b8;--accent:#0891b2;--accent2:#7c3aed;--good:#059669;--warn:#d97706;}
     .hero2 text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif}
     .hero2 .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}
     @media (prefers-reduced-motion: reduce){
@@ -14,9 +12,7 @@
     }
   </style>
   <style>
-    .hero2{--paper:#0E0E10;--ink:#F5F5F0;--ink-2:#8A8A93;--ink-3:#4A4A52;--rule:#232327;--acid:#C8FF4D;--field-ink:#F5F5F0;--field-acid:#C8FF4D;--ease:cubic-bezier(.16,.7,0,1);}
-    .hero2-light.hero2{--paper:#F2EFE9;--ink:#0B0B0D;--ink-2:#6B6B72;--ink-3:#9A9A9E;--rule:#DEDAD1;--acid:#5C7A00;--field-ink:#2A2A2E;--field-acid:#5C7A00;--ease:cubic-bezier(.16,.7,0,1);}
-    @media (prefers-color-scheme: light){.hero2{--paper:#F2EFE9;--ink:#0B0B0D;--ink-2:#6B6B72;--ink-3:#9A9A9E;--rule:#DEDAD1;--acid:#5C7A00;--field-ink:#2A2A2E;--field-acid:#5C7A00;--ease:cubic-bezier(.16,.7,0,1);}}
+    .hero2{--paper:#F2EFE9;--ink:#0B0B0D;--ink-2:#6B6B72;--ink-3:#9A9A9E;--rule:#DEDAD1;--acid:#5C7A00;--field-ink:#2A2A2E;--field-acid:#5C7A00;--ease:cubic-bezier(.16,.7,0,1);}
     .hero2 .display{font-family:'Archivo Black','Arial Black','Helvetica Neue',Arial,system-ui,sans-serif;font-weight:900}
     .hero2 .cjk{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',system-ui,sans-serif}
     .hero2 .mono{font-family:ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace}

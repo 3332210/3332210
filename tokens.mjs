@@ -118,24 +118,44 @@ export function esc(s) {
  * @param {object} opts
  * @param {string} opts.scope  root class, e.g. 'hero'
  * @param {object} [opts.overrides] map of tokenName -> css value, applied in both schemes
+ * @param {'dark'|'light'|null} [opts.theme] emit a SINGLE theme and no media query
  */
-export function styleBlock({ scope, overrides = {} } = {}) {
-  const varLines = (theme) =>
-    Object.entries(THEMES[theme])
+export function styleBlock({ scope, overrides = {}, theme = null } = {}) {
+  const varLines = (t) =>
+    Object.entries(THEMES[t])
       .map(([k, v]) => `--${kebab(k)}:${overrides[k] ?? v};`)
       .join('');
 
-  return `<style>
-    .${scope}{${varLines('dark')}}
-    .${scope}-light.${scope}{${varLines('light')}}
-    @media (prefers-color-scheme: light){.${scope}{${varLines('light')}}}
+  const base = `
     .${scope} text{font-family:${FONT_SANS}}
     .${scope} .mono{font-family:${FONT_MONO}}
     @media (prefers-reduced-motion: reduce){
       :where(.${scope}, .${scope} *){animation-duration:.001s !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;transition-delay:0s !important}
       .${scope}[data-motion],
       .${scope}[data-motion] *{opacity:1 !important;transform:none !important}
-    }
+    }`;
+
+  /* Single-theme mode, for the two files GitHub's <picture> swaps between.
+   *
+   * This is not a convenience. With only the auto-switching form, a "forced
+   * light" file is forceable only through the double-class rule — but the
+   * `@media (prefers-color-scheme: light)` block follows it at equal
+   * specificity, so on a light-theme machine the media rule wins and the
+   * "forced light" file renders DARK, and vice versa. Two files that are
+   * supposed to differ end up identical in practice.
+   *
+   * Dropping the media query and emitting one theme's tokens is the only form
+   * that is deterministic in any embedding. */
+  if (theme === 'dark' || theme === 'light') {
+    return `<style>
+    .${scope}{${varLines(theme)}}${base}
+  </style>`;
+  }
+
+  return `<style>
+    .${scope}{${varLines('dark')}}
+    .${scope}-light.${scope}{${varLines('light')}}
+    @media (prefers-color-scheme: light){.${scope}{${varLines('light')}}}${base}
   </style>`;
 }
 

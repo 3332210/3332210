@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T17:47:04.685Z",
+  "generatedAt": "2026-10-08T17:59:48.424Z",
   "user": {
     "login": "3332210",
     "name": null,
@@ -36,6 +36,20 @@
   },
   "repos": [
     {
+      "name": "3332210",
+      "description": "",
+      "htmlUrl": "https://github.com/3332210/3332210",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "sizeKb": 126,
+      "license": null,
+      "createdAt": "2026-10-03T15:52:11Z",
+      "pushedAt": "2026-10-08T17:53:28Z",
+      "archived": false
+    },
+    {
       "name": "3332210.github.io",
       "description": "INKWARD — 守墨 · personal site",
       "htmlUrl": "https://github.com/3332210/3332210.github.io",
@@ -47,20 +61,6 @@
       "license": null,
       "createdAt": "2026-10-08T17:18:55Z",
       "pushedAt": "2026-10-08T17:34:44Z",
-      "archived": false
-    },
-    {
-      "name": "3332210",
-      "description": "",
-      "htmlUrl": "https://github.com/3332210/3332210",
-      "language": "JavaScript",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "sizeKb": 126,
-      "license": null,
-      "createdAt": "2026-10-03T15:52:11Z",
-      "pushedAt": "2026-10-08T17:19:23Z",
       "archived": false
     },
     {
@@ -2138,23 +2138,23 @@
   "languages": [
     {
       "name": "JavaScript",
-      "bytes": 335162,
-      "pct": 75
+      "bytes": 384256,
+      "pct": 77.5
     },
     {
       "name": "HTML",
       "bytes": 51503,
-      "pct": 11.5
+      "pct": 10.4
     },
     {
       "name": "CSS",
       "bytes": 43116,
-      "pct": 9.6
+      "pct": 8.7
     },
     {
       "name": "PowerShell",
       "bytes": 17065,
-      "pct": 3.8
+      "pct": 3.4
     }
   ],
   "totals": {
@@ -2163,24 +2163,7 @@
     "stars": 2,
     "forks": 0,
     "followers": 0,
-    "languageBytes": 446846
-  },
-  "hero": {
-    "_kicker": "Deliberately omitted so lib/hero.mjs derives it as `GITHUB PROFILE · UPDATED <date>` from data.generatedAt — setting it here would freeze the date.",
-    "tagline": "写工具，解决那些每个人都默默忍受的小问题。",
-    "taglineEn": "Small tools for problems everyone quietly puts up with.",
-    "terminal": {
-      "path": "~/3332210",
-      "lines": [
-        "dsh plugin add notify-cues",
-        "node --test test/",
-        "wc -l lib/*"
-      ],
-      "output": {
-        "text": "6 chimes · 1 silence · 0 audio files",
-        "tone": "good"
-      }
-    }
+    "languageBytes": 495940
   },
   "meta": {
     "user": "3332210",
