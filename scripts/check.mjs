@@ -33,7 +33,22 @@ const JSON_OUT = arg('json', null);
 const KNOWN_TOKENS = new Set([
   'bg0', 'bg1', 'bg2', 'line', 'line-strong', 'text1', 'text2', 'text3',
   'accent', 'accent-2', 'good', 'warn',
+  /* The INKWARD palette, used by the hero and the work list. */
+  'paper', 'paper-2', 'ink', 'ink-2', 'ink-3', 'rule', 'acid',
 ]);
+
+/**
+ * The CSS scope each asset uses, when it differs from the output file stem.
+ *
+ * A generator picks its own scope. hero2 renders assets/hero.svg under the scope
+ * `hero2` (the file is named for where it appears, the scope for what made it),
+ * and assets/work.svg under `work`. Deriving the scope from the filename made
+ * the variant check report a failure that was not real.
+ */
+const SCOPE_BY_NAME = { hero: 'hero2' };
+
+/** Assets that no longer exist; listing them here keeps the checks honest. */
+const RETIRED = new Set(['project']);
 
 const errors = [];
 const warnings = [];
@@ -110,7 +125,10 @@ function checkSvg(file, svg) {
   const ids = [...svg.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
   const refs = new Set([...svg.matchAll(/url\(#([^)]+)\)/g)].map((m) => m[1]));
   /* Scope label for id-prefix checks: strip the extension only. */
-  const scope = file.replace(/\.svg$/, '');
+  /* The scope a generator chose may differ from its output stem — see
+     SCOPE_BY_NAME. The id-prefix rule is about the scope, not the filename. */
+  const stem = file.replace(/\.svg$/, '');
+  const scope = SCOPE_BY_NAME[stem] ?? stem;
   for (const id of ids) {
     if (id === 't' || id === 'd') continue; // svgRoot's title/desc ids
     if (!id.startsWith(scope)) {
@@ -147,11 +165,17 @@ function checkSvg(file, svg) {
   return { bytes, isLight };
 }
 
-/** A forced-light variant must not be byte-identical to the default one. */
-function checkVariantPair(name, dir) {
+/**
+ * A forced-light variant must not be byte-identical to the default one.
+ * @param {string} name  registry name — also the preview pair's stem
+ * @param {string} dir   assets directory
+ * @param {string} [fileName] the shipped file, when it is not `<name>.svg`
+ */
+function checkVariantPair(name, dir, fileName = `${name}.svg`) {
   const d = join(dir, 'preview', `${name}-dark.svg`);
   const l = join(dir, 'preview', `${name}-light.svg`);
-  const shipped = join(dir, `${name}.svg`);
+  const shipped = join(dir, fileName);
+  const scope = SCOPE_BY_NAME[name] ?? name;
 
   /* Preview variants are local-only (they are gitignored in the deployed repo),
      so their absence is only informational when running in CI. */
@@ -161,7 +185,7 @@ function checkVariantPair(name, dir) {
       ? `preview pair incomplete for ${name} — run node build.mjs`
       : `previews not generated in this checkout (CI): theme verified locally`;
     notes.push(note);
-    if (!existsSync(shipped)) err(name, `missing shipped asset ${name}.svg`);
+    if (!existsSync(shipped)) err(name, `missing shipped asset ${fileName}`);
     return;
   }
 
@@ -177,23 +201,23 @@ function checkVariantPair(name, dir) {
   const rootClassOf = (svg) => /<svg\b[^>]*\sclass="([^"]*)"/.exec(svg)?.[1] ?? '';
   const clsDark = rootClassOf(a);
   const clsLight = rootClassOf(b);
-  if (!new RegExp(`(^|\\s)${name}-light(\\s|$)`).test(clsLight)) {
-    err(name, `forced-light preview root class is "${clsLight}" — expected it to include "${name}-light"`);
+  if (!new RegExp(`(^|\\s)${scope}-light(\\s|$)`).test(clsLight)) {
+    err(name, `forced-light preview root class is "${clsLight}" — expected it to include "${scope}-light"`);
   }
-  if (new RegExp(`(^|\\s)${name}-light(\\s|$)`).test(clsDark)) {
+  if (new RegExp(`(^|\\s)${scope}-light(\\s|$)`).test(clsDark)) {
     err(name, `default preview root class is "${clsDark}" — it must not carry the -light scope`);
   }
-  if (!new RegExp(`(^|\\s)${name}(\\s|$)`).test(clsDark)) {
-    warn(name, `default preview root class is "${clsDark}" — expected it to include the scope "${name}"`);
+  if (!new RegExp(`(^|\\s)${scope}(\\s|$)`).test(clsDark)) {
+    warn(name, `default preview root class is "${clsDark}" — expected it to include the scope "${scope}"`);
   }
 
   // The shipped asset is the default render, so it must equal the dark preview.
   if (existsSync(shipped)) {
     if (readFileSync(shipped, 'utf8') !== a) {
-      err(name, `shipped ${name}.svg differs from preview/${name}-dark.svg — they must be the same render`);
+      err(name, `shipped ${fileName} differs from preview/${name}-dark.svg — they must be the same render`);
     }
   } else {
-    err(name, `missing shipped asset ${name}.svg`);
+    err(name, `missing shipped asset ${fileName}`);
   }
 }
 
@@ -293,8 +317,16 @@ function main() {
     const svg = readFileSync(join(ASSETS, f), 'utf8');
     checkSvg(f, svg);
   }
-  for (const name of ['hero', 'project', 'matrix', 'activity']) {
-    checkVariantPair(name, ASSETS);
+  /* Registry name -> shipped filename. Two use a flat name that differs from
+     their registry stem, so the pair is spelled out rather than derived. */
+  for (const [name, fileName] of [
+    ['hero', 'hero.svg'],
+    ['work', 'work.svg'],
+    ['matrix', 'matrix.svg'],
+    ['activity', 'activity.svg'],
+  ]) {
+    if (RETIRED.has(name)) continue;
+    checkVariantPair(name, ASSETS, fileName);
   }
   checkReadme();
 

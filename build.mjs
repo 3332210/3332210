@@ -35,14 +35,31 @@ function arg(name, fallback) {
 const DATA = resolve(HERE, arg('data', 'data/stats.json'));
 const COPY = resolve(HERE, arg('copy', 'data/copy.json'));
 const OUT = resolve(HERE, arg('out', 'assets'));
+/** The kit root, used to rewrite the work rows in README.md in place. */
+const KIT = HERE;
 
 /** The asset registry. Order here is the order assets appear in the README. */
+/**
+ * The asset registry.
+ *
+ * Two generator shapes exist and both are legitimate:
+ *   - `render(data, opts)`  one file that themes itself -> assets/<name>.svg
+ *   - `renderWork(data, opts)` plus `markdown(data)`, used by hero2 to emit the
+ *     work list AND the markdown rows that sit between the BELOW markers in
+ *     README.md (an SVG inside an <img> cannot carry a link).
+ * `fn` names the entry point; `flat` names the output file for the single-file
+ * case. Getting these wrong silently ships a stale asset, so they are explicit.
+ */
 const ASSETS = [
-  { name: 'hero',    module: './lib/hero.mjs',          height: 320, title: 'Hero banner' },
-  { name: 'project', module: './lib/project.mjs',       height: 228, title: 'Featured project card' },
-  { name: 'matrix',  module: './lib/matrix.mjs',        height: 252, title: 'Engineering matrix' },
+  { name: 'hero',     module: './lib/hero2.mjs',        fn: 'render',     file: 'hero.svg',     height: 360, title: 'Hero — INKWARD / 守墨 with generated field' },
+  { name: 'work',     module: './lib/hero2.mjs',        fn: 'renderWork', file: 'work.svg',     height: 128, title: 'Work list' },
+  { name: 'matrix',   module: './lib/matrix.mjs',       height: 252, title: 'Engineering matrix' },
   { name: 'activity', module: './lib/contribution.mjs', height: 188, title: 'Activity strip and language mix' },
 ];
+
+/** Where the work list's markdown rows live inside README.md. */
+const BELOW_BEGIN = '<!-- BELOW:BEGIN -->';
+const BELOW_END = '<!-- BELOW:END -->';
 
 const SCHEME_RE = /@media\s*\(\s*prefers-color-scheme\s*:\s*light\s*\)/g;
 
@@ -56,13 +73,14 @@ const SCHEME_RE = /@media\s*\(\s*prefers-color-scheme\s*:\s*light\s*\)/g;
  */
 async function renderAsset(entry, data, opts = {}) {
   const mod = await import(new URL(entry.module, import.meta.url).href);
-  if (typeof mod.render !== 'function') {
-    throw new Error(`${entry.module} does not export render(data, opts)`);
+  const fnName = entry.fn ?? 'render';
+  if (typeof mod[fnName] !== 'function') {
+    throw new Error(`${entry.module} does not export ${fnName}(data, opts)`);
   }
-  const out = await mod.render(data, opts);
+  const out = await mod[fnName](data, opts);
   const svg = typeof out === 'string' ? out : out?.svg;
   if (typeof svg !== 'string' || !svg.includes('<svg')) {
-    throw new Error(`${entry.module} render() did not return SVG (got ${typeof svg})`);
+    throw new Error(`${entry.module} ${fnName}() did not return SVG (got ${typeof svg})`);
   }
   return svg;
 }
@@ -112,11 +130,13 @@ async function main() {
     try {
       const svg = await renderAsset(entry, data);
       const supportsScheme = hasSchemeSupport(svg);
+      // `file` names the flat single-file output; otherwise the name is the stem.
+      const outName = entry.file ?? `${entry.name}.svg`;
 
       if (supportsScheme) {
         // One shipped file. The asset themes itself, so there is nothing to
         // switch between and nothing that can drift out of sync.
-        writeFileSync(join(outDir, `${entry.name}.svg`), svg);
+        writeFileSync(join(outDir, outName), svg);
 
         // Preview-only variants that pin the scheme, so both themes can be
         // screenshotted and reviewed on a single machine. The README never
@@ -125,7 +145,7 @@ async function main() {
         writeFileSync(join(previewDir, `${entry.name}-light.svg`), await renderAsset(entry, data, { scheme: 'light' }));
       } else {
         problems.push(`${entry.name}: no prefers-color-scheme block; the asset will not follow the reader's theme`);
-        writeFileSync(join(outDir, `${entry.name}.svg`), svg);
+        writeFileSync(join(outDir, outName), svg);
       }
 
       manifest.assets.push({
@@ -135,13 +155,39 @@ async function main() {
         height: entry.height,
         supportsColorScheme: supportsScheme,
         bytes: Buffer.byteLength(svg, 'utf8'),
-        files: [`${entry.name}.svg`],
+        files: [outName],
       });
-      console.log(`  built ${entry.name.padEnd(9)} ${String(Buffer.byteLength(svg, 'utf8')).padStart(7)} B  scheme=${supportsScheme ? 'yes' : 'NO'}`);
+      console.log(`  built ${outName.padEnd(13)} ${String(Buffer.byteLength(svg, 'utf8')).padStart(7)} B  scheme=${supportsScheme ? 'yes' : 'NO'}`);
     } catch (e) {
       problems.push(`${entry.name}: ${e.message}`);
       console.error(`  FAILED ${entry.name}: ${e.message}`);
     }
+  }
+
+  /* The work list's markdown rows, rewritten from the same data so a new
+     repository appears in the README with no code change. An SVG inside an
+     <img> cannot carry a hyperlink, which is exactly why these rows exist. */
+  try {
+    const readme = join(KIT, 'README.md');
+    if (existsSync(readme)) {
+      const md = readFileSync(readme, 'utf8');
+      const hero2 = await import(new URL('./lib/hero2.mjs', import.meta.url).href);
+      if (typeof hero2.markdown === 'function'
+        && md.includes(BELOW_BEGIN) && md.includes(BELOW_END)) {
+        const rows = hero2.markdown(data).trim();
+        const next = md.slice(0, md.indexOf(BELOW_BEGIN) + BELOW_BEGIN.length)
+          + '\n' + rows + '\n'
+          + md.slice(md.indexOf(BELOW_END));
+        if (next !== md) {
+          writeFileSync(readme, next);
+          console.log('  updated    README.md work rows');
+        } else {
+          console.log('  unchanged  README.md work rows');
+        }
+      }
+    }
+  } catch (e) {
+    problems.push(`README work rows: ${e.message}`);
   }
 
   writeFileSync(join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');

@@ -1,0 +1,1 @@
+`01` · **[dsh-notify-cues ↗](https://github.com/3332210/dsh-notify-cues)** — Per-reason Windows notifications for DeepSeek Harness — distinct chimes for completed / interrupted / error · JAVASCRIPT · ★ 2
