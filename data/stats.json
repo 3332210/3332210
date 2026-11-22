@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T10:56:28.215Z",
+  "generatedAt": "2026-11-22T11:15:27.483Z",
   "user": {
     "login": "3332210",
     "name": null,
@@ -43,10 +43,10 @@
       "topics": [],
       "stars": 0,
       "forks": 0,
-      "sizeKb": 460,
+      "sizeKb": 462,
       "license": null,
       "createdAt": "2026-10-03T15:52:11Z",
-      "pushedAt": "2026-11-20T11:30:15Z",
+      "pushedAt": "2026-11-21T10:56:29Z",
       "archived": false
     },
     {
@@ -125,15 +125,10 @@
   "activity": {
     "window": {
       "days": 30,
-      "from": "2026-10-23",
-      "to": "2026-11-21"
+      "from": "2026-10-24",
+      "to": "2026-11-22"
     },
     "series": [
-      {
-        "date": "2026-10-23",
-        "count": 0,
-        "level": 0
-      },
       {
         "date": "2026-10-24",
         "count": 0,
@@ -278,6 +273,11 @@
         "date": "2026-11-21",
         "count": 0,
         "level": 0
+      },
+      {
+        "date": "2026-11-22",
+        "count": 0,
+        "level": 0
       }
     ],
     "summary": {
@@ -288,41 +288,6 @@
     "yearTotal": 18,
     "yearStreak": 4,
     "calendar": [
-      {
-        "date": "2025-11-16",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-11-17",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-11-18",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-11-19",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-11-20",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-11-21",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-11-22",
-        "count": 0,
-        "level": 0
-      },
       {
         "date": "2025-11-23",
         "count": 0,
@@ -2140,6 +2105,11 @@
       },
       {
         "date": "2026-11-21",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-11-22",
         "count": 0,
         "level": 0
       }
